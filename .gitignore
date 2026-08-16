@@ -1,0 +1,16 @@
+# Herramientas locales del editor
+.claude/
+.vscode/
+.idea/
+
+# Basura del sistema operativo
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Dependencias (por si alguna vez se agregan)
+node_modules/
+package-lock.json
+
+# Registros
+*.log

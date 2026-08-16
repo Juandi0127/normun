@@ -1,0 +1,38 @@
+IMÁGENES DE NORMUN
+==================
+
+ARCHIVOS QUE USA LA PÁGINA
+--------------------------
+
+  logo-normun.png   ->  LOGO OFICIAL. Ya está.
+                        Aparece en el preloader, el menú y el pie.
+
+  og-normun.jpg     ->  OPCIONAL. Imagen de vista previa al compartir
+                        el enlace por WhatsApp / Instagram / etc.
+                        Todavía no existe: por ahora se usa el logo.
+                        Medida ideal: 1200 x 630 px, horizontal.
+                        Si se crea, hay que apuntar la etiqueta
+                        og:image de index.html hacia ella.
+
+
+SOBRE EL LOGO
+-------------
+En el menú y el pie va dentro de un disco blanco, que es su
+contexto natural, así que funciona igual con fondo blanco o con
+transparencia.
+
+El archivo actual mide 285 x 285 px, suficiente para todos los
+tamaños en que se usa. Si aparece una versión más grande o en
+.svg, vale la pena reemplazarla: se vería más nítida en pantallas
+de alta densidad. Si es .svg, cambiar la extensión en index.html
+(sale en tres lugares).
+
+
+FOTOS DE LAS COORDINADORAS
+--------------------------
+Ya no se usan. La sección "Quienes lo hacen posible" muestra un
+icono de persona en el color de cada tarjeta (rojo, amarillo,
+verde), sin depender de ninguna imagen.
+
+Si algún día se consiguen las fotos, se puede volver a montar la
+sección con retratos verticales 3:4.

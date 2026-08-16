@@ -1,0 +1,37 @@
+# Configuración de Netlify para NORMUN
+# Sitio estático: no hay nada que compilar, se publica la carpeta tal cual.
+
+[build]
+  publish = "."
+  command = ""
+
+# ---------------------------------------------------------------
+# Cabeceras de seguridad, para todo el sitio
+# ---------------------------------------------------------------
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), interest-cohort=()"
+
+# ---------------------------------------------------------------
+# Caché de los recursos
+#
+# Una hora con revalidación: suficiente para que la página cargue
+# rápido en visitas repetidas, y corto para que los cambios (fotos
+# nuevas, apertura de inscripciones) se vean el mismo día.
+#
+# Si más adelante el sitio deja de cambiar, se puede subir a
+# "max-age=604800" (una semana).
+# ---------------------------------------------------------------
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=3600, must-revalidate"
+
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"

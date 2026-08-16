@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#FBFAF4">
+<title>NORMUN · Modelo de Naciones Unidas — Escuela Normal Superior del Distrito de Barranquilla</title>
+<meta name="description" content="NORMUN es el Modelo de Naciones Unidas de la Escuela Normal Superior del Distrito de Barranquilla. Un espacio para debatir, proponer y alzar la voz: seis comisiones, reglamento oficial y formación en oratoria y diplomacia.">
+<meta name="author" content="NORMUN — Escuela Normal Superior del Distrito de Barranquilla">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="NORMUN · Modelo de Naciones Unidas">
+<meta property="og:description" content="Escuela Normal Superior del Distrito de Barranquilla. Debatir, proponer y alzar la voz.">
+<meta property="og:locale" content="es_CO">
+<meta property="og:image" content="assets/img/logo-normun.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230A0F0C'/%3E%3Cg fill='none' stroke-width='2'%3E%3Ccircle cx='32' cy='32' r='18' stroke='%232E9E42'/%3E%3Ccircle cx='32' cy='32' r='12' stroke='%23F0C33C'/%3E%3Ccircle cx='32' cy='32' r='6' stroke='%23F0C33C'/%3E%3Cpath d='M32 14v36M14 32h36M19.3 19.3 44.7 44.7M44.7 19.3 19.3 44.7' stroke='%23C1272D' stroke-width='1.6'/%3E%3C/g%3E%3C/svg%3E">
+
+<link rel="apple-touch-icon" href="assets/img/logo-normun.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+<!-- ============ PRELOADER ============ -->
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader__inner">
+    <span class="loader__logo">
+      <img src="assets/img/logo-normun.png" alt="" loading="eager"
+           onerror="this.closest('.loader__logo').classList.add('is-missing')">
+      <!-- Respaldo si falta el archivo: emblema inspirado en el logo —
+           globo de la ONU en proyección azimutal, rama izquierda roja
+           y rama derecha verde. -->
+      <svg class="loader__emblem" viewBox="0 0 120 120" fill="none" aria-hidden="true">
+      <g class="lo-globe">
+        <circle cx="60" cy="52" r="26"/>
+        <circle cx="60" cy="52" r="17.3"/>
+        <circle cx="60" cy="52" r="8.7"/>
+        <path d="M60 26v52M34 52h52M41.6 33.6 78.4 70.4M78.4 33.6 41.6 70.4"/>
+      </g>
+      <g class="lo-branch lo-branch--l">
+        <path d="M60 106C43 101 31 88 28 68"/>
+        <ellipse class="lo-leaf" cx="47" cy="99" rx="7" ry="3.2" transform="rotate(-18 47 99)"/>
+        <ellipse class="lo-leaf" cx="38.5" cy="91" rx="7" ry="3.2" transform="rotate(-40 38.5 91)"/>
+        <ellipse class="lo-leaf" cx="32" cy="80" rx="7" ry="3.2" transform="rotate(-60 32 80)"/>
+        <ellipse class="lo-leaf" cx="28.5" cy="68" rx="6.5" ry="3" transform="rotate(-80 28.5 68)"/>
+      </g>
+      <g class="lo-branch lo-branch--r">
+        <path d="M60 106c17-5 29-18 32-38"/>
+        <ellipse class="lo-leaf" cx="73" cy="99" rx="7" ry="3.2" transform="rotate(18 73 99)"/>
+        <ellipse class="lo-leaf" cx="81.5" cy="91" rx="7" ry="3.2" transform="rotate(40 81.5 91)"/>
+        <ellipse class="lo-leaf" cx="88" cy="80" rx="7" ry="3.2" transform="rotate(60 88 80)"/>
+        <ellipse class="lo-leaf" cx="91.5" cy="68" rx="6.5" ry="3" transform="rotate(80 91.5 68)"/>
+      </g>
+      </svg>
+    </span>
+    <div class="loader__word" aria-label="NORMUN">
+      <span>N</span><span>O</span><span>R</span><span>M</span><span>U</span><span>N</span>
+    </div>
+    <div class="loader__bar"><i></i></div>
+  </div>
+</div>
+
+<div class="grain" aria-hidden="true"></div>
+<div class="scrollbar" aria-hidden="true"><i id="scrollProgress"></i></div>
+
+<a class="skip" href="#modelo">Saltar al contenido</a>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <div class="nav__wrap">
+    <a href="#inicio" class="brand" aria-label="NORMUN — inicio">
+      <!-- Guarda el logo oficial en assets/img/logo-normun.png y aparece solo.
+           Mientras no exista, se muestra el emblema SVG de respaldo. -->
+      <span class="brand__logo">
+        <img src="assets/img/logo-normun.png" alt="" loading="eager"
+             onerror="this.closest('.brand__logo').classList.add('is-missing')">
+        <svg class="brand__mark" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+          <circle class="bm-globe" cx="24" cy="24" r="15" stroke-width="1.7"/>
+          <circle class="bm-lat" cx="24" cy="24" r="10" stroke-width="1.1"/>
+          <circle class="bm-lat" cx="24" cy="24" r="5" stroke-width="1.1"/>
+          <path class="bm-mer" d="M24 9v30M9 24h30M13.4 13.4 34.6 34.6M34.6 13.4 13.4 34.6" stroke-width="1.1"/>
+        </svg>
+      </span>
+      <span class="brand__text">
+        <b>NORMUN</b>
+        <em>Escuela Normal Superior &middot; Barranquilla</em>
+      </span>
+    </a>
+
+    <nav class="nav__links" id="navLinks" aria-label="Navegación principal">
+      <a href="#modelo">El Modelo</a>
+      <a href="#comisiones">Comisiones</a>
+      <a href="#roles">Roles</a>
+      <a href="#procedimiento">Procedimiento</a>
+      <a href="#documentos">Documentos</a>
+      <a href="#equipo">Equipo</a>
+      <a href="#inscripcion" class="nav__cta">Inscripción</a>
+    </nav>
+
+    <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="navLinks">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="inicio">
+  <canvas class="hero__canvas" id="globeCanvas" aria-hidden="true"></canvas>
+  <div class="hero__veil" aria-hidden="true"></div>
+  <div class="hero__glow" aria-hidden="true"></div>
+
+  <div class="hero__content">
+    <p class="hero__eyebrow reveal" data-delay="0">
+      <span class="dot"></span> Modelo de Naciones Unidas · Barranquilla, Colombia
+    </p>
+
+    <h1 class="hero__title">
+      <span class="line"><span class="up up--ink" style="--d:.05s">NOR</span><span class="up up--red" style="--d:.12s">MUN</span></span>
+      <span class="line hero__sub"><span class="up" style="--d:.22s">Donde la palabra</span></span>
+      <span class="line hero__sub"><span class="up up--italic" style="--d:.3s">construye el mundo</span></span>
+    </h1>
+
+    <p class="hero__lead reveal" data-delay="120">
+      El Modelo de Naciones Unidas de la <strong>Escuela Normal Superior del Distrito
+      de Barranquilla</strong>: un espacio para debatir, proponer y alzar la voz.
+    </p>
+
+    <div class="hero__actions reveal" data-delay="200">
+      <a href="#inscripcion" class="btn btn--red">
+        Quiero ser delegado
+        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h12M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="#comisiones" class="btn btn--ghost">Ver las comisiones</a>
+    </div>
+
+    <ul class="hero__facts reveal" data-delay="280">
+      <li><b data-count="6">0</b><span>Comisiones</span></li>
+      <li><b data-count="5">0</b><span>Roles en mesa</span></li>
+      <li><b data-count="11">0</b><span>Mociones oficiales</span></li>
+      <li><b>∞</b><span>Voces por escuchar</span></li>
+    </ul>
+  </div>
+
+  <a href="#modelo" class="hero__scroll" aria-label="Desplazar hacia abajo">
+    <span class="hero__scroll-line"><i></i></span>
+    <span class="hero__scroll-txt">Desliza</span>
+  </a>
+</section>
+
+<!-- ============ TICKER ============ -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker__track">
+    <span>Diplomacia</span><i>◆</i><span>Oratoria</span><i>◆</i><span>Liderazgo</span><i>◆</i>
+    <span>Negociación</span><i>◆</i><span>Investigación</span><i>◆</i><span>Cooperación</span><i>◆</i>
+    <span>Debate</span><i>◆</i><span>Ciudadanía global</span><i>◆</i>
+    <span>Diplomacia</span><i>◆</i><span>Oratoria</span><i>◆</i><span>Liderazgo</span><i>◆</i>
+    <span>Negociación</span><i>◆</i><span>Investigación</span><i>◆</i><span>Cooperación</span><i>◆</i>
+    <span>Debate</span><i>◆</i><span>Ciudadanía global</span><i>◆</i>
+  </div>
+</div>
+
+<!-- ============ 01 · EL MODELO ============ -->
+<section class="section section--modelo" id="modelo">
+  <div class="wrap">
+    <header class="sec-head reveal">
+      <span class="sec-num">01</span>
+      <h2 class="sec-title">¿Qué es un Modelo<br>de Naciones Unidas?</h2>
+      <p class="sec-desc">
+        Es una simulación académica de los órganos reales de la ONU. Cada estudiante asume la
+        representación de una nación, investiga su postura oficial y la defiende ante sus pares
+        siguiendo el mismo reglamento, el mismo lenguaje y la misma exigencia de la diplomacia real.
+      </p>
+    </header>
+
+    <div class="pillars">
+      <article class="pillar reveal" data-delay="0">
+        <div class="pillar__icon">
+          <svg viewBox="0 0 40 40" fill="none" aria-hidden="true">
+            <path d="M8 10h24v16H20l-7 6v-6H8z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+            <path d="M14 16h12M14 21h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3>Un espacio para debatir,<br>proponer y alzar la voz</h3>
+        <p>Cada delegación llega con una postura investigada y la defiende con argumentos. Aquí no se
+        gana levantando la voz: se gana sustentando la idea.</p>
+        <span class="pillar__idx">I</span>
+      </article>
+
+      <article class="pillar reveal" data-delay="90">
+        <div class="pillar__icon">
+          <svg viewBox="0 0 40 40" fill="none" aria-hidden="true">
+            <circle cx="14" cy="15" r="4.5" stroke="currentColor" stroke-width="1.5"/>
+            <circle cx="26" cy="15" r="4.5" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M6 30c0-4.4 3.6-8 8-8s8 3.6 8 8M18 30c0-4.4 3.6-8 8-8s8 3.6 8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3>Conectamos ideas,<br>personas y sueños de cambio</h3>
+        <p>El lobby, los bloques y los papeles de trabajo enseñan algo que ningún examen mide:
+        construir acuerdos con quien piensa distinto.</p>
+        <span class="pillar__idx">II</span>
+      </article>
+
+      <article class="pillar reveal" data-delay="180">
+        <div class="pillar__icon">
+          <svg viewBox="0 0 40 40" fill="none" aria-hidden="true">
+            <rect x="16" y="7" width="8" height="16" rx="4" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M11 19a9 9 0 0 0 18 0M20 28v5M15 33h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3>Aquí se forman líderes y<br>nace la oratoria con impacto</h3>
+        <p>Del primer discurso tembloroso a la defensa firme de una resolución. NORMUN es el
+        entrenamiento de una generación que sabe hablar en público.</p>
+        <span class="pillar__idx">III</span>
+      </article>
+    </div>
+
+    <figure class="quote on-dark reveal">
+      <blockquote>
+        «La delegación de Colombia considera…»
+      </blockquote>
+      <figcaption>
+        Seis palabras que cambian la forma de pensar de un estudiante para siempre.
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ 02 · COMISIONES ============ -->
+<section class="section section--comisiones" id="comisiones">
+  <div class="wrap">
+    <header class="sec-head sec-head--split reveal">
+      <div>
+        <span class="sec-num">02</span>
+        <h2 class="sec-title">Las comisiones</h2>
+      </div>
+      <p class="sec-desc">
+        Seis mesas de trabajo, seis maneras distintas de mirar el mundo. Elige la que
+        haga latir tu vocación: cada una tiene su propio tono, su propio reglamento y
+        su propia forma de exigirte.
+      </p>
+    </header>
+
+    <div class="coms">
+
+      <article class="com reveal" data-delay="0" style="--com:#2E9E42; --com-ink:#1B7030">
+        <div class="com__bg" aria-hidden="true"></div>
+        <div class="com__top">
+          <span class="com__tag">Comisión I</span>
+          <svg class="com__icon" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+            <path d="M24 6l14 6v12c0 9-6 15.5-14 18-8-2.5-14-9-14-18V12l14-6z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+            <path d="M17 25l5 5 9-10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3 class="com__name">Desarme y Seguridad Internacional</h3>
+        <p class="com__desc">Se especializa en regular el armamento de los países y promover la paz y
+        seguridad internacional.</p>
+        <ul class="com__meta">
+          <li>Lenguaje diplomático amplio en temas de conflictos bélicos</li>
+        </ul>
+      </article>
+
+      <article class="com reveal" data-delay="70" style="--com:#F0C33C; --com-ink:#8A6710">
+        <div class="com__bg" aria-hidden="true"></div>
+        <div class="com__top">
+          <span class="com__tag">Comisión II</span>
+          <svg class="com__icon" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+            <path d="M8 34c0-6 5-10 11-10s11 4 11 10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+            <circle cx="19" cy="16" r="5.5" stroke="currentColor" stroke-width="1.6"/>
+            <path d="M31 14h9M31 20h9M31 26h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3 class="com__name">Alto Comisionado de la ONU para los Refugiados</h3>
+        <p class="com__desc">Es el encargado de proteger a los refugiados y desplazados por
+        persecuciones o conflictos.</p>
+        <ul class="com__meta">
+          <li>ACNUR · Protección internacional</li>
+        </ul>
+      </article>
+
+      <article class="com reveal" data-delay="140" style="--com:#C1272D; --com-ink:#A81F26">
+        <div class="com__bg" aria-hidden="true"></div>
+        <div class="com__top">
+          <span class="com__tag">Comisión III</span>
+          <svg class="com__icon" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+            <circle cx="24" cy="19" r="9" stroke="currentColor" stroke-width="1.6"/>
+            <path d="M24 28v13M18 35h12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3 class="com__name">ONU Mujeres</h3>
+        <p class="com__desc">Desarrolla programas, políticas y normas con el fin de defender los
+        derechos humanos de las mujeres.</p>
+        <ul class="com__meta">
+          <li>Igualdad de género · Derechos humanos</li>
+        </ul>
+      </article>
+
+      <article class="com reveal" data-delay="0" style="--com:#2E9E42; --com-ink:#1B7030">
+        <div class="com__bg" aria-hidden="true"></div>
+        <div class="com__top">
+          <span class="com__tag">Comisión IV</span>
+          <svg class="com__icon" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+            <path d="M6 17l18-7 18 7-18 7-18-7z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+            <path d="M13 21v10c0 3 5 5.5 11 5.5S35 34 35 31V21" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3 class="com__name">Organización de la ONU para la Educación, la Ciencia y la Cultura</h3>
+        <p class="com__desc">Se especializa en contribuir a la paz, la erradicación de la pobreza y el
+        desarrollo sostenible mediante la cooperación internacional.</p>
+        <ul class="com__meta">
+          <li>UNESCO · Cooperación internacional</li>
+        </ul>
+      </article>
+
+      <article class="com com--wide reveal" data-delay="70" style="--com:#C1272D; --com-ink:#A81F26">
+        <div class="com__bg" aria-hidden="true"></div>
+        <div class="com__top">
+          <span class="com__tag com__tag--hot">Comisión V · Alta exigencia</span>
+          <svg class="com__icon" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+            <circle cx="24" cy="24" r="15" stroke="currentColor" stroke-width="1.6"/>
+            <path d="M9 24h30M24 9c4 4.5 6 9.5 6 15s-2 10.5-6 15c-4-4.5-6-9.5-6-15s2-10.5 6-15z" stroke="currentColor" stroke-width="1.4"/>
+          </svg>
+        </div>
+        <h3 class="com__name">Consejo de Seguridad</h3>
+        <p class="com__desc">La comisión más demandante del modelo. Aquí las decisiones pesan y los
+        errores se pagan.</p>
+        <ul class="com__meta">
+          <li>Aplicación del derecho a réplica y reto a la competencia</li>
+          <li>Pérdida de voto en todas las comisiones</li>
+        </ul>
+      </article>
+
+      <article class="com com--wide reveal" data-delay="140" style="--com:#F0C33C; --com-ink:#8A6710">
+        <div class="com__bg" aria-hidden="true"></div>
+        <div class="com__top">
+          <span class="com__tag">Comisión VI · Especial</span>
+          <svg class="com__icon" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+            <path d="M12 38V10l24 5-24 5" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+            <circle cx="12" cy="38" r="2.4" fill="currentColor"/>
+          </svg>
+        </div>
+        <h3 class="com__name">Comisión Colombia</h3>
+        <p class="com__desc">Un formato propio, más cercano y más frontal, para debatir el país desde
+        adentro.</p>
+        <ul class="com__meta">
+          <li>Mayor flexibilidad en el lenguaje parlamentario: términos como «guerra» se pueden usar y no es obligatorio hablar en tercera persona</li>
+          <li>No se representan países: se representan personajes importantes como políticos e invitados especiales</li>
+        </ul>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ 03 · ROLES ============ -->
+<section class="section section--roles" id="roles">
+  <div class="wrap">
+    <header class="sec-head reveal">
+      <span class="sec-num">03</span>
+      <h2 class="sec-title">Roles de la comisión</h2>
+      <p class="sec-desc">Ninguna sesión funciona sin su mesa. Estos son los cinco roles que sostienen
+      el debate — elige uno para conocer su función.</p>
+    </header>
+
+    <div class="roles reveal">
+      <div class="roles__list" role="tablist" aria-label="Roles de la comisión">
+        <button class="role is-active" role="tab" aria-selected="true" data-role="presidente">
+          <span class="role__n">01</span>
+          <span class="role__t">Presidente / a</span>
+          <span class="role__arrow" aria-hidden="true">→</span>
+        </button>
+        <button class="role" role="tab" aria-selected="false" data-role="vicepresidente">
+          <span class="role__n">02</span>
+          <span class="role__t">Vicepresidente / a</span>
+          <span class="role__arrow" aria-hidden="true">→</span>
+        </button>
+        <button class="role" role="tab" aria-selected="false" data-role="delegados">
+          <span class="role__n">03</span>
+          <span class="role__t">Delegados</span>
+          <span class="role__arrow" aria-hidden="true">→</span>
+        </button>
+        <button class="role" role="tab" aria-selected="false" data-role="secretaria">
+          <span class="role__n">04</span>
+          <span class="role__t">Secretaría</span>
+          <span class="role__arrow" aria-hidden="true">→</span>
+        </button>
+        <button class="role" role="tab" aria-selected="false" data-role="staff">
+          <span class="role__n">05</span>
+          <span class="role__t">Staff</span>
+          <span class="role__arrow" aria-hidden="true">→</span>
+        </button>
+      </div>
+
+      <div class="roles__panel" id="rolePanel" role="tabpanel" aria-live="polite">
+        <!-- inyectado por JS -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 04 · PROCEDIMIENTO ============ -->
+<section class="section section--proc" id="procedimiento">
+  <div class="wrap">
+    <header class="sec-head reveal">
+      <span class="sec-num">04</span>
+      <h2 class="sec-title">Reglamento y procedimiento</h2>
+      <p class="sec-desc">Todo lo que un delegado debe dominar antes de tomar la palabra.</p>
+    </header>
+
+    <div class="tabs reveal">
+      <div class="tabs__bar" role="tablist" aria-label="Procedimiento">
+        <button class="tab is-active" role="tab" aria-selected="true" data-tab="orden">Reglas de orden</button>
+        <button class="tab" role="tab" aria-selected="false" data-tab="lenguaje">Lenguaje diplomático</button>
+        <button class="tab" role="tab" aria-selected="false" data-tab="debate">Tipos de debate</button>
+        <button class="tab" role="tab" aria-selected="false" data-tab="puntos">Puntos</button>
+        <button class="tab" role="tab" aria-selected="false" data-tab="mociones">Mociones</button>
+        <button class="tab" role="tab" aria-selected="false" data-tab="asamblea">Asamblea y votaciones</button>
+        <button class="tab" role="tab" aria-selected="false" data-tab="sanciones">Sanciones</button>
+      </div>
+
+      <!-- Reglas de orden -->
+      <div class="tabp is-active" data-panel="orden" role="tabpanel">
+        <div class="tabp__grid">
+          <div class="tabp__lead">
+            <h3>Cinco reglas innegociables</h3>
+            <p>Se aplican desde el momento en que la presidencia declara abierta la sesión hasta que
+            la suspende. Su incumplimiento activa el régimen de sanciones.</p>
+          </div>
+          <ol class="rulelist">
+            <li><span>01</span><p>Respetar turnos de palabra <em>(levantar placas)</em>.</p></li>
+            <li><span>02</span><p>Hablar <strong>SIEMPRE</strong> en tercera persona.</p></li>
+            <li><span>03</span><p>Escuchar sin interrumpir.</p></li>
+            <li><span>04</span><p>Usar un lenguaje diplomático, en todo momento.</p></li>
+            <li><span>05</span><p>No hablar sin permiso de la mesa directiva.</p></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- Lenguaje diplomático -->
+      <div class="tabp" data-panel="lenguaje" role="tabpanel">
+        <div class="tabp__grid">
+          <div class="tabp__lead">
+            <h3>Lenguaje diplomático</h3>
+            <p>El delegado nunca habla por sí mismo: habla por una nación. Esa distancia es,
+            literalmente, la primera lección de la diplomacia.</p>
+          </div>
+          <div class="lang">
+            <div class="lang__card lang__card--yes">
+              <span class="lang__flag">Se usa</span>
+              <p>Tercera persona: <em>«La delegación de Brasil considera…»</em></p>
+            </div>
+            <div class="lang__card lang__card--no">
+              <span class="lang__flag">Se evita</span>
+              <p>«Yo pienso», «yo creo», «yo quiero».</p>
+            </div>
+            <div class="lang__card lang__card--gold">
+              <span class="lang__flag">Siempre</span>
+              <p>Con respeto, incluso al debatir ideas contrarias.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tipos de debate -->
+      <div class="tabp" data-panel="debate" role="tabpanel">
+        <div class="tabp__grid">
+          <div class="tabp__lead">
+            <h3>Tipos de debate</h3>
+            <p>La comisión avanza alternando tres formatos. Saber cuál pedir, y cuándo, es
+            media victoria.</p>
+          </div>
+          <div class="cards3">
+            <article class="c3">
+              <h4>Lista de oradores</h4>
+              <p>Orden de delegados para dar discursos <em>(ejemplo: 1 minuto cada uno)</em>.</p>
+            </article>
+            <article class="c3">
+              <h4>Debate moderado</h4>
+              <p>La mesa directiva da la palabra para las intervenciones.</p>
+            </article>
+            <article class="c3">
+              <h4>Debate no moderado</h4>
+              <p>Conversación libre, como una mesa de trabajo para redactar propuestas.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+
+      <!-- Puntos -->
+      <div class="tabp" data-panel="puntos" role="tabpanel">
+        <div class="tabp__grid">
+          <div class="tabp__lead">
+            <h3>Puntos de intervención</h3>
+            <p>Los puntos interrumpen el curso normal del debate para resolver algo puntual.
+            Se dirigen siempre a la mesa directiva.</p>
+          </div>
+          <div class="points">
+            <div class="point"><b>Punto de información</b><span>Pregunta dirigida a otra delegación sobre su intervención.</span></div>
+            <div class="point"><b>Punto de información a la mesa</b><span>Consulta dirigida a la mesa directiva.</span></div>
+            <div class="point"><b>Punto de duda reglamentaria</b><span>Aclaración sobre el reglamento o el procedimiento.</span></div>
+            <div class="point"><b>Punto de privilegio personal</b><span>Incomodidad que impide seguir el debate.</span></div>
+            <div class="point"><b>Punto de orden</b><span>Señala una falta al procedimiento en curso.</span></div>
+          </div>
+          <p class="tabp__note">Las descripciones ampliadas se ajustarán al reglamento definitivo de la mesa directiva.</p>
+        </div>
+      </div>
+
+      <!-- Mociones -->
+      <div class="tabp" data-panel="mociones" role="tabpanel">
+        <div class="tabp__grid">
+          <div class="tabp__lead">
+            <h3>Las once mociones</h3>
+            <p>Una moción es una propuesta formal sobre el curso del debate. Se somete a votación
+            y, si prospera, cambia el rumbo de la sesión.</p>
+          </div>
+          <div class="motions">
+            <div class="motion"><span class="motion__n">01</span><b>Moción para abrir o establecer la agenda</b><p>Iniciar el trabajo en la comisión.</p></div>
+            <div class="motion"><span class="motion__n">02</span><b>Moción para abrir un debate</b><p>Empezar debate (formal o informal) con duración máxima de 30 min; mayoría simple.</p></div>
+            <div class="motion"><span class="motion__n">03</span><b>Moción para cerrar el debate</b><p>Terminar el debate; puede requerir mayoría calificada.</p></div>
+            <div class="motion"><span class="motion__n">04</span><b>Moción para extensión del tiempo de debate</b><p>Alargar el debate; incluso quien está en el podio puede pedirlo.</p></div>
+            <div class="motion"><span class="motion__n">05</span><b>Moción para tiempo de lobbying o caucus</b><p>Pausa para negociar o redactar; mayoría simple y la presidencia fija el tiempo.</p></div>
+            <div class="motion"><span class="motion__n">06</span><b>Moción para receso</b><p>Pausa corta según la agenda.</p></div>
+            <div class="motion"><span class="motion__n">07</span><b>Moción para retirar propuesta</b><p>Quitar una resolución o enmienda antes de votarla.</p></div>
+            <div class="motion"><span class="motion__n">08</span><b>Moción para dividir la pregunta</b><p>Votar la resolución o enmienda por partes.</p></div>
+            <div class="motion"><span class="motion__n">09</span><b>Moción para pasar directamente a votación</b><p>Saltar el debate e ir directo a votar.</p></div>
+            <div class="motion"><span class="motion__n">10</span><b>Moción para reconsiderar votación</b><p>Repetir la votación, solo si se perdió antes.</p></div>
+            <div class="motion"><span class="motion__n">11</span><b>Moción para suspender sesión</b><p>Terminar la jornada y continuar al día siguiente.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Asamblea -->
+      <div class="tabp" data-panel="asamblea" role="tabpanel">
+        <div class="tabp__grid">
+          <div class="tabp__lead">
+            <h3>Asamblea General y votaciones</h3>
+            <p>El momento en que todas las comisiones convergen y las palabras se convierten
+            en decisiones.</p>
+          </div>
+          <div class="assembly">
+            <article class="assembly__main">
+              <h4>Asamblea General</h4>
+              <p>Reunión general con todas las naciones de la ONU participantes para hablar sobre
+              los papeles de trabajo.</p>
+            </article>
+            <article class="assembly__vote">
+              <h4>Votaciones</h4>
+              <ul class="ticks">
+                <li>A favor, en contra o abstención: cada país equivale a <strong>un voto</strong>.</li>
+                <li>La <strong>mayoría simple</strong> —más votos a favor que en contra— decide.</li>
+                <li>La mesa directiva anuncia el resultado final.</li>
+              </ul>
+              <div class="voteviz" aria-hidden="true">
+                <span class="voteviz__bar voteviz__bar--yes"><i></i><em>A favor</em></span>
+                <span class="voteviz__bar voteviz__bar--no"><i></i><em>En contra</em></span>
+                <span class="voteviz__bar voteviz__bar--abs"><i></i><em>Abstención</em></span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sanciones -->
+      <div class="tabp" data-panel="sanciones" role="tabpanel">
+        <div class="tabp__grid">
+          <div class="tabp__lead">
+            <h3>Régimen de sanciones</h3>
+            <p>La cortesía diplomática no es un adorno: es la condición para que el debate exista.</p>
+          </div>
+          <div class="sanctions">
+            <div class="sanction" data-lv="1">
+              <span class="sanction__lv">Primera</span>
+              <b>Llamado de atención</b>
+              <p>La mesa directiva advierte a la delegación.</p>
+            </div>
+            <div class="sanction" data-lv="2">
+              <span class="sanction__lv">Segunda</span>
+              <b>Se anota en el registro</b>
+              <p>Queda constancia escrita de la falta.</p>
+            </div>
+            <div class="sanction" data-lv="3">
+              <span class="sanction__lv">Tercera</span>
+              <b>Salida del recinto</b>
+              <p>Por el tiempo que estipule la mesa directiva.</p>
+            </div>
+            <div class="sanction sanction--out" data-lv="4">
+              <span class="sanction__lv">Expulsión</span>
+              <b>Gritos e insultos directos</b>
+              <p>Falta grave: expulsión inmediata del modelo.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ 05 · DOCUMENTOS ============ -->
+<section class="section section--docs section--light" id="documentos">
+  <div class="wrap">
+    <header class="sec-head reveal">
+      <span class="sec-num">05</span>
+      <h2 class="sec-title">Documentos oficiales</h2>
+      <p class="sec-desc">Un modelo se escribe antes de hablarse. Estas son las piezas que toda
+      delegación debe preparar.</p>
+    </header>
+
+    <!-- Discurso de entrada -->
+    <article class="doc-hero reveal">
+      <div class="doc-hero__paper" aria-hidden="true">
+        <div class="paper">
+          <div class="paper__shield"></div>
+          <div class="paper__lines">
+            <i style="--w:70%"></i><i style="--w:92%"></i><i style="--w:86%"></i>
+            <i style="--w:95%"></i><i style="--w:60%"></i><i style="--w:88%"></i>
+            <i style="--w:78%"></i><i style="--w:40%"></i>
+          </div>
+          <span class="paper__stamp">NORMUN</span>
+        </div>
+      </div>
+
+      <div class="doc-hero__body">
+        <span class="doc-hero__kicker">Documento I</span>
+        <h3>Discurso de entrada</h3>
+        <p class="doc-hero__intro">La carta de presentación de tu delegación. Se lee de pie, se
+        entrega impreso y se juzga en noventa segundos.</p>
+
+        <div class="doc-hero__cols">
+          <div>
+            <h4>Estructura</h4>
+            <ul class="ticks ticks--sm">
+              <li>Escudo de la delegación a representar</li>
+              <li>Logo de la comisión</li>
+              <li>Tema</li>
+              <li>Nombre oficial de la nación</li>
+              <li>Saludo</li>
+              <li>Frase célebre <em>(opcional)</em></li>
+              <li>Planteamiento general del problema</li>
+              <li>Posición del país</li>
+              <li>Posibles soluciones</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Requisitos</h4>
+            <ul class="specs">
+              <li><b>Fuente</b><span>Times New Roman</span></li>
+              <li><b>Tamaño</b><span>13</span></li>
+              <li><b>Extensión</b><span>Máx. 2 páginas</span></li>
+              <li><b>Tiempo</b><span>Máx. 1:30 min</span></li>
+              <li><b>Cantidad</b><span>1 discurso por tema</span></li>
+              <li><b>Entrega</b><span>Impreso a color el día del debate</span></li>
+            </ul>
+            <p class="doc-hero__note">Al finalizar la lectura, el discurso debe ser llevado a la mesa.</p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Otros documentos -->
+    <div class="docs">
+      <details class="docx reveal" data-delay="0" open>
+        <summary>
+          <span class="docx__kicker">Documento II</span>
+          <span class="docx__title">Papeles de trabajo</span>
+          <span class="docx__plus" aria-hidden="true"></span>
+        </summary>
+        <div class="docx__body">
+          <p class="docx__lead">Serán el anteproyecto de resolución que podrán presentar las
+          delegaciones, referidas al tópico en cuestión.</p>
+          <ul class="ticks ticks--sm">
+            <li>Deben contar con el aval del <strong>20 % de las delegaciones</strong>.</li>
+            <li>Las delegaciones solo podrán presentar <strong>un papel de trabajo por tópico</strong>.</li>
+            <li>Deben pasar por la revisión de presidencia.</li>
+            <li>Las delegaciones redactantes deben elegir dos representantes.</li>
+            <li>Al finalizar la lectura de los papeles de trabajo se puede continuar con un debate informal.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="docx reveal" data-delay="80">
+        <summary>
+          <span class="docx__kicker">Documento III</span>
+          <span class="docx__title">Enmiendas</span>
+          <span class="docx__plus" aria-hidden="true"></span>
+        </summary>
+        <div class="docx__body">
+          <p class="docx__lead">Agrega, modifica o elimina partes de los papeles de trabajo, antes
+          de que estos sean votados.</p>
+          <ul class="ticks ticks--sm">
+            <li>La delegación que lo desee puede hacer una enmienda, y deberá hacerlo <strong>por escrito</strong>, entregada a presidencia.</li>
+            <li>Si la enmienda recibe el apoyo de todas las delegaciones se considera <strong>amigable</strong> y pasa a formar parte del documento de inmediato; de lo contrario se considera <strong>no amigable</strong> y se somete a votación.</li>
+            <li>La mesa llamará a la delegación que propuso la enmienda, que tendrá <strong>2 minutos</strong> para explicarla.</li>
+            <li>Esa delegación tendrá <strong>2 minutos más</strong> para contestar preguntas.</li>
+            <li>Si la presidencia o el comité general lo considera pertinente, podrá procederse a un debate sobre la enmienda.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="docx reveal" data-delay="160">
+        <summary>
+          <span class="docx__kicker">Documento IV</span>
+          <span class="docx__title">Comunicado de prensa</span>
+          <span class="docx__plus" aria-hidden="true"></span>
+        </summary>
+        <div class="docx__body">
+          <p class="docx__lead">Utilizado cuando no hay suficientes naciones para poder conformar un
+          bloque y redactar un papel de trabajo.</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- Banco de frases -->
+    <div class="phrases reveal">
+      <div class="phrases__head">
+        <h3>Banco de frases</h3>
+        <p>El vocabulario formal de una resolución. Toca una frase para copiarla.</p>
+      </div>
+      <div class="phrases__grid">
+        <div class="phbox">
+          <h4><span>A</span> Frases preambulatorias</h4>
+          <div class="chips">
+            <button class="chip">Expresando su satisfacción</button>
+            <button class="chip">Guiados por</button>
+            <button class="chip">Habiendo adoptado</button>
+            <button class="chip">Habiendo considerado</button>
+            <button class="chip">Habiendo estudiado</button>
+            <button class="chip">Conscientes de</button>
+            <button class="chip">Considerando</button>
+            <button class="chip">Declarando</button>
+          </div>
+        </div>
+        <div class="phbox phbox--gold">
+          <h4><span>B</span> Cláusulas operativas y frases resolutivas</h4>
+          <div class="chips">
+            <button class="chip">Acepta</button>
+            <button class="chip">Designa</button>
+            <button class="chip">Además invita</button>
+            <button class="chip">Exhorta</button>
+            <button class="chip">Además resuelve</button>
+            <button class="chip">Expresa su aprecio</button>
+            <button class="chip">Felicita</button>
+            <button class="chip">Finalmente condena</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 06 · EQUIPO ============ -->
+<section class="section section--team" id="equipo">
+  <div class="wrap">
+    <header class="sec-head reveal">
+      <span class="sec-num">06</span>
+      <h2 class="sec-title">Quienes lo hacen posible</h2>
+      <p class="sec-desc">Coordinación y asesoría del proyecto NORMUN.</p>
+    </header>
+
+    <div class="team">
+      <article class="member reveal" data-delay="0">
+        <div class="member__avatar" aria-hidden="true">
+          <svg viewBox="0 0 48 48" fill="none">
+            <circle cx="24" cy="17.5" r="8" stroke="currentColor" stroke-width="1.8"/>
+            <path d="M9.5 39c0-7.8 6.5-13 14.5-13s14.5 5.2 14.5 13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <span class="member__role">Coordinadora del proyecto</span>
+        <h3 class="member__name">Excydia María<br>Escolar Escolar</h3>
+      </article>
+
+      <article class="member reveal" data-delay="90">
+        <div class="member__avatar" aria-hidden="true">
+          <svg viewBox="0 0 48 48" fill="none">
+            <circle cx="24" cy="17.5" r="8" stroke="currentColor" stroke-width="1.8"/>
+            <path d="M9.5 39c0-7.8 6.5-13 14.5-13s14.5 5.2 14.5 13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <span class="member__role">Coordinadora del proyecto</span>
+        <h3 class="member__name">Mónica Esther<br>Antequera Cabrera</h3>
+      </article>
+
+      <article class="member reveal" data-delay="180">
+        <div class="member__avatar" aria-hidden="true">
+          <svg viewBox="0 0 48 48" fill="none">
+            <circle cx="24" cy="17.5" r="8" stroke="currentColor" stroke-width="1.8"/>
+            <path d="M9.5 39c0-7.8 6.5-13 14.5-13s14.5 5.2 14.5 13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <span class="member__role">Coordinadora de logística</span>
+        <h3 class="member__name">Rosiris<br>Orozco</h3>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 07 · INSCRIPCIÓN ============
+     Cuando se abran las inscripciones, reemplazar el aviso
+     .cta__status por los botones reales. En el README está
+     explicado paso a paso. -->
+<section class="section section--cta on-dark" id="inscripcion">
+  <div class="cta-bg" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="cta reveal">
+      <span class="sec-num">07</span>
+
+      <p class="cta__status"><i aria-hidden="true"></i>Inscripciones próximamente</p>
+
+      <h2 class="cta__title">Tu delegación<br>te está esperando</h2>
+      <p class="cta__lead">Cuando se abran las inscripciones, este será el lugar. Mientras tanto,
+      ve conociendo las comisiones y elige dónde quieres que se escuche tu voz.</p>
+
+      <div class="cta__actions">
+        <a href="#comisiones" class="btn btn--red btn--lg">
+          Conoce las comisiones
+          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h12M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <ul class="cta__steps">
+        <li><b>01</b><span>Elige tu comisión</span></li>
+        <li><b>02</b><span>Recibe tu delegación</span></li>
+        <li><b>03</b><span>Prepara tu discurso</span></li>
+        <li><b>04</b><span>Debate</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="foot on-dark">
+  <div class="wrap">
+    <div class="foot__top">
+      <div class="foot__brand">
+        <span class="foot__logo">
+          <img src="assets/img/logo-normun.png" alt="Logo de NORMUN" loading="eager"
+               onerror="this.closest('.foot__logo').classList.add('is-missing')">
+          <svg class="brand__mark" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+            <circle class="bm-globe" cx="24" cy="24" r="15" stroke-width="1.5"/>
+            <circle class="bm-lat" cx="24" cy="24" r="10" stroke-width="1"/>
+            <circle class="bm-lat" cx="24" cy="24" r="5" stroke-width="1"/>
+            <path class="bm-mer" d="M24 9v30M9 24h30M13.4 13.4 34.6 34.6M34.6 13.4 13.4 34.6" stroke-width="1"/>
+          </svg>
+        </span>
+        <p class="foot__name">NORMUN</p>
+        <p class="foot__school">Modelo de Naciones Unidas de la<br>Escuela Normal Superior del Distrito de Barranquilla</p>
+      </div>
+
+      <nav class="foot__nav" aria-label="Navegación del pie de página">
+        <div>
+          <h4>El modelo</h4>
+          <a href="#modelo">¿Qué es un MUN?</a>
+          <a href="#comisiones">Comisiones</a>
+          <a href="#roles">Roles</a>
+        </div>
+        <div>
+          <h4>Para delegados</h4>
+          <a href="#procedimiento">Procedimiento</a>
+          <a href="#documentos">Documentos</a>
+        </div>
+        <div>
+          <h4>NORMUN</h4>
+          <a href="#equipo">Equipo</a>
+          <a href="#inscripcion">Inscripción</a>
+        </div>
+      </nav>
+    </div>
+
+    <div class="foot__bottom">
+      <p>© <span id="year">2026</span> NORMUN · Escuela Normal Superior del Distrito de Barranquilla. Barranquilla, Colombia.</p>
+      <p class="foot__mini">Diseñado para formar la próxima generación de voces.</p>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
