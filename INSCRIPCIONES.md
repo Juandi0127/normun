@@ -240,6 +240,194 @@ hoja. **Siempre hacer esta prueba antes de anunciar las inscripciones.**
 
 ---
 
+## Dejar la hoja bonita (opcional)
+
+Este script da formato a la pestaña `Inscripciones`: cabecera con los colores
+institucionales, anchos de columna a medida, filas alternadas, fechas legibles,
+filtro y un par de resaltados útiles.
+
+**Se puede correr las veces que se quiera.** Borra el formato anterior antes de
+aplicar el nuevo, así que no se acumula ni se duplica nada. Y no toca los datos.
+
+### Cómo usarlo
+
+1. En el editor de Apps Script, pegar este código **debajo** del que ya está
+   (sin borrar nada de lo anterior).
+2. Arriba, en el selector de funciones, elegir **`darFormato`**.
+3. Botón **Ejecutar**.
+
+No hay que volver a publicar la implementación: esto se corre a mano, no forma
+parte de lo que recibe el formulario.
+
+```javascript
+/**
+ * NORMUN — Formato de la hoja de inscripciones.
+ * Se puede volver a correr cuando se quiera; no toca los datos.
+ */
+function darFormato() {
+  const hoja = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Inscripciones');
+  if (!hoja) {
+    SpreadsheetApp.getUi().alert('No encontré la pestaña "Inscripciones".');
+    return;
+  }
+
+  const VERDE  = '#2E9E42';
+  const ROJO   = '#C1272D';
+  const COLS   = 14;                     // de la A a la N
+  const filas  = hoja.getLastRow();
+  const ultima = Math.max(filas, 2);
+
+  // --- Cabecera -------------------------------------------------------
+  hoja.getRange(1, 1, 1, COLS)
+      .setBackground(VERDE)
+      .setFontColor('#FFFFFF')
+      .setFontWeight('bold')
+      .setFontSize(10)
+      .setVerticalAlignment('middle')
+      .setHorizontalAlignment('left')
+      .setWrap(true);
+  hoja.setRowHeight(1, 42);
+
+  // --- Ancho de cada columna ------------------------------------------
+  const anchos = [140, 220, 115, 110, 215, 120, 200, 75, 205, 205, 155, 90, 260, 110];
+  anchos.forEach(function (ancho, i) { hoja.setColumnWidth(i + 1, ancho); });
+
+  // --- Cuerpo ---------------------------------------------------------
+  if (filas > 1) {
+    const cuerpo = hoja.getRange(2, 1, filas - 1, COLS);
+    cuerpo.setFontSize(10)
+          .setVerticalAlignment('top')
+          .setWrap(false);
+
+    hoja.getRange(2, 1,  filas - 1, 1).setNumberFormat('dd/MM/yyyy  HH:mm'); // Recibido
+    hoja.getRange(2, 4,  filas - 1, 1).setNumberFormat('dd/MM/yyyy');        // Nacimiento
+    hoja.getRange(2, 13, filas - 1, 1).setWrap(true);                        // Comentarios
+    hoja.getRange(2, 3,  filas - 1, 1).setHorizontalAlignment('left');       // Documento
+    hoja.getRange(2, 8,  filas - 1, 1).setHorizontalAlignment('center');     // Grado
+    hoja.getRange(2, 14, filas - 1, 1).setHorizontalAlignment('center');     // Autorización
+  }
+
+  // --- Filas alternadas (se quita la anterior para no apilar) ----------
+  hoja.getBandings().forEach(function (b) { b.remove(); });
+  hoja.getRange(1, 1, ultima, COLS)
+      .applyRowBanding(SpreadsheetApp.BandingTheme.LIGHT_GREY, true, false);
+
+  // --- Bordes y líneas -------------------------------------------------
+  hoja.getRange(1, 1, ultima, COLS)
+      .setBorder(null, null, null, null, null, true, '#E0E0E0',
+                 SpreadsheetApp.BorderStyle.SOLID);
+
+  // --- Congelar y filtrar ----------------------------------------------
+  hoja.setFrozenRows(1);
+  hoja.setFrozenColumns(2);              // Recibido y Nombre siempre visibles
+  if (hoja.getFilter()) hoja.getFilter().remove();
+  hoja.getRange(1, 1, ultima, COLS).createFilter();
+
+  // --- Resaltados ------------------------------------------------------
+  const rango = hoja.getRange(2, 1, Math.max(ultima - 1, 1), COLS);
+  const reglas = [];
+
+  // Documento repetido: casi siempre es un envío doble
+  reglas.push(SpreadsheetApp.newConditionalFormatRule()
+    .whenFormulaSatisfied('=AND($C2<>"", COUNTIF($C:$C,$C2)>1)')
+    .setBackground('#FBE4E2')
+    .setRanges([rango])
+    .build());
+
+  // Consejo de Seguridad: la comisión de alta exigencia, para verla de lejos
+  reglas.push(SpreadsheetApp.newConditionalFormatRule()
+    .whenTextContains('Consejo de Seguridad')
+    .setBackground('#FDF0C8')
+    .setRanges([hoja.getRange(2, 9, Math.max(ultima - 1, 1), 2)])
+    .build());
+
+  // Autorización
+  reglas.push(SpreadsheetApp.newConditionalFormatRule()
+    .whenTextEqualTo('Sí')
+    .setFontColor(VERDE).setBold(true)
+    .setRanges([hoja.getRange(2, 14, Math.max(ultima - 1, 1), 1)])
+    .build());
+
+  reglas.push(SpreadsheetApp.newConditionalFormatRule()
+    .whenTextEqualTo('No')
+    .setFontColor(ROJO).setBold(true).setBackground('#FBE4E2')
+    .setRanges([hoja.getRange(2, 14, Math.max(ultima - 1, 1), 1)])
+    .build());
+
+  hoja.setConditionalFormatRules(reglas);
+
+  SpreadsheetApp.getActiveSpreadsheet()
+    .toast('Formato aplicado a ' + Math.max(filas - 1, 0) + ' inscripciones.', 'NORMUN', 5);
+}
+```
+
+### Qué hace, en corto
+
+| | |
+|---|---|
+| **Cabecera** | Verde institucional, texto blanco, fila congelada |
+| **Columnas** | Ancho a medida de cada dato, sin tener que ajustarlas a mano |
+| **Fechas** | `07/09/2026 22:22` en vez del formato crudo |
+| **Filas** | Alternadas en gris muy suave, para seguir la línea con la vista |
+| **Congelado** | Fecha y nombre quedan fijos al desplazarse a la derecha |
+| **Filtro** | Listo en la cabecera, para filtrar por comisión o institución |
+| **Documento repetido** | Fila en rosa: casi siempre es un envío doble |
+| **Consejo de Seguridad** | Resaltado en amarillo, por ser la comisión de alta exigencia |
+| **Autorización** | «Sí» en verde, «No» en rojo y con fondo |
+
+### Resumen por comisión
+
+Esta segunda función crea una pestaña aparte con el conteo de inscripciones por
+comisión. Se corre igual que la anterior, eligiendo **`hacerResumen`**.
+
+Va en **otra pestaña** a propósito: así no interfiere con las columnas donde
+escribe el formulario.
+
+```javascript
+/** Cuenta inscripciones por comisión en una pestaña aparte. */
+function hacerResumen() {
+  const libro = SpreadsheetApp.getActiveSpreadsheet();
+  const datos = libro.getSheetByName('Inscripciones');
+  if (!datos || datos.getLastRow() < 2) return;
+
+  const COMISIONES = [
+    'Desarme y Seguridad Internacional',
+    'Alto Comisionado de la ONU para los Refugiados',
+    'ONU Mujeres',
+    'UNESCO',
+    'Consejo de Seguridad',
+    'Comisión Colombia'
+  ];
+
+  let hoja = libro.getSheetByName('Resumen');
+  if (hoja) hoja.clear(); else hoja = libro.insertSheet('Resumen');
+
+  const filas = datos.getLastRow() - 1;
+  const primera = datos.getRange(2, 9, filas, 1).getValues().flat();
+  const segunda = datos.getRange(2, 10, filas, 1).getValues().flat();
+
+  const tabla = [['Comisión', 'Primera opción', 'Segunda opción', 'Total']];
+  COMISIONES.forEach(function (c) {
+    const p = primera.filter(function (v) { return v === c; }).length;
+    const s = segunda.filter(function (v) { return v === c; }).length;
+    tabla.push([c, p, s, p + s]);
+  });
+  tabla.push(['TOTAL DE INSCRITOS', filas, '', '']);
+
+  hoja.getRange(1, 1, tabla.length, 4).setValues(tabla);
+  hoja.getRange(1, 1, 1, 4)
+      .setBackground('#2E9E42').setFontColor('#FFFFFF').setFontWeight('bold');
+  hoja.getRange(tabla.length, 1, 1, 4).setFontWeight('bold');
+  hoja.setColumnWidth(1, 320);
+  hoja.setFrozenRows(1);
+}
+```
+
+> El resumen es una foto del momento: no se actualiza solo. Hay que volver a
+> correr `hacerResumen` cuando se quiera la cifra al día.
+
+---
+
 ## Cosas que conviene saber
 
 **La confirmación en pantalla sí verifica el servidor.** El despliegue de Apps
