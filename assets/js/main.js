@@ -330,7 +330,7 @@
      Para conectarlo: pegar abajo la URL que da Apps Script al
      publicar el script como aplicación web.
      ========================================================= */
-  var ENDPOINT = 'https://script.google.com/a/macros/ensdbexcelencia.edu.co/s/AKfycby1fq_yr7P9TS0MWlnmvhJrTKLAp13GSu4Wxpmkw0Te29_x4PAtMXX7H-bqcDyE2gDK/exec';   // <-- pegar aquí la URL de Apps Script
+  var ENDPOINT = 'https://script.google.com/macros/s/AKfycbzPc3Dr9oKiy6MjQXDDrmHqz56QrUrudpmnzqUXI-nVvLnXd1H2QHLEMI9o4WxJ1Ghj/exec';   // <-- pegar aquí la URL de Apps Script
 
   (function inscripcion() {
     var form = $('#inscripcionForm');
@@ -453,11 +453,20 @@
       boton.disabled = true;
       $('.form-card__submit-txt', boton).textContent = 'Enviando…';
 
-      /* Apps Script no devuelve cabeceras CORS, así que se envía como
-         formulario simple: la petición sale, la respuesta no se lee.
-         Es el modo estándar de usar Apps Script desde un sitio estático. */
-      fetch(ENDPOINT, { method: 'POST', body: datos, mode: 'no-cors' })
-        .then(function () {
+      /* El despliegue de Apps Script devuelve Access-Control-Allow-Origin: *,
+         así que se puede leer la respuesta y confirmar de verdad que la fila
+         se escribió. Solo se muestra "recibida" cuando el script lo confirma:
+         nunca se le dice a alguien que quedó inscrito si no quedó. */
+      fetch(ENDPOINT, { method: 'POST', body: datos })
+        .then(function (r) {
+          if (!r.ok) throw new Error('HTTP ' + r.status);
+          return r.json();
+        })
+        .then(function (res) {
+          /* "duplicado" también es éxito: la persona ya estaba registrada */
+          if (!res || (res.estado !== 'ok' && res.estado !== 'duplicado')) {
+            throw new Error((res && res.estado) || 'respuesta inesperada');
+          }
           var nombre = (form.nombre.value || '').trim().split(' ')[0] || 'delegado';
           var destinoNombre = $('#doneName');
           if (destinoNombre) destinoNombre.textContent = nombre;
@@ -466,8 +475,9 @@
           card.scrollIntoView({ block: 'center', behavior: reduce ? 'auto' : 'smooth' });
         })
         .catch(function () {
-          mostrarErrorGeneral('No pudimos enviar la inscripción. Revisa tu conexión e ' +
-                              'inténtalo de nuevo en un momento.');
+          mostrarErrorGeneral('No pudimos registrar tu inscripción. Revisa tu conexión e ' +
+                              'inténtalo de nuevo en un momento. Si el problema sigue, ' +
+                              'escríbele a la organización antes de dar por hecho que quedaste inscrito.');
         })
         .finally(function () {
           card.classList.remove('is-sending');

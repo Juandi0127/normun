@@ -193,8 +193,8 @@ function respuesta(estado) {
 > cualquier otra persona, Google le devuelve una pantalla de inicio de sesión
 > y la inscripción se pierde.
 >
-> Y se pierde **en silencio**: la página muestra «Inscripción recibida» igual,
-> porque el navegador no puede leer lo que respondió Google.
+> La página detecta ese caso y muestra un error, así que nadie se va creyendo
+> que quedó inscrito. Pero nadie podría inscribirse tampoco.
 >
 > Tiene que quedar en **«Cualquier persona»**, a secas.
 >
@@ -242,11 +242,21 @@ hoja. **Siempre hacer esta prueba antes de anunciar las inscripciones.**
 
 ## Cosas que conviene saber
 
-**La confirmación en pantalla no verifica el servidor.** Por cómo funciona
-Apps Script, el navegador envía los datos pero no puede leer la respuesta. La
-página muestra «Inscripción recibida» cuando el envío salió, no cuando la fila
-se escribió. En la práctica Apps Script es muy confiable, pero por eso vale la
-pena activar el aviso por correo (`AVISAR_A`): si llega el correo, la fila está.
+**La confirmación en pantalla sí verifica el servidor.** El despliegue de Apps
+Script devuelve la cabecera `Access-Control-Allow-Origin: *`, así que la página
+puede leer la respuesta del script. Solo muestra «Inscripción recibida» cuando
+el script confirma que escribió la fila. Si algo falla —el script devuelve
+error, se cae la red, o el despliegue quedó restringido y Google responde con
+una pantalla de login— la persona ve un mensaje de error, no un éxito falso.
+
+Probado con las cinco situaciones: respuesta 500, error del script, página de
+login de Google, red caída y envío duplicado. Las cuatro primeras muestran
+error; el duplicado se trata como éxito, porque la persona ya está registrada.
+
+> Si en el futuro se cambia el despliegue y deja de enviar cabeceras CORS, el
+> formulario empezará a mostrar error en todos los envíos aunque las filas se
+> escriban. En ese caso hay que revisar que la implementación siga como
+> «Cualquier persona».
 
 **Si se edita el código del script**, hay que volver a *Implementar → Gestionar
 implementaciones → editar → Nueva versión*. Si no, sigue corriendo el código
