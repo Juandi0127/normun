@@ -24,7 +24,7 @@ amarilla, todo sobre blanco.
 | `--red` / `--red-soft` / `--red-deep` | `#C1272D` / `#E87A72` / `#8E1A20` | Rojo del logo |
 | `--green-ink` / `--yellow-ink` / `--red-ink` | `#1B7030` / `#8A6710` / `#A81F26` | **Versiones legibles como texto sobre claro** |
 | `--bg` / `--bg-2` / `--bg-3` / `--surface` | `#FBFAF4` / `#F4F2E8` / `#EDEADC` / `#FFF` | Superficies claras |
-| `--ink` … `--ink-4` | `#0A0F0C` … `#1D2820` | Superficies oscuras |
+| `--ink` | `#0A0F0C` | Superficie oscura |
 | `--tricolor` | degradado | Franja rojo-amarillo-verde, en el orden del logo |
 
 ### La página es clara de principio a fin
@@ -34,8 +34,7 @@ cuerpo de la página sería un corte brusco. Así la lectura fluye sin saltos.
 
 El oscuro aparece sólo como **puntuación**, en bloques sueltos que destacan
 sobre el papel: la cita de la sección 01, el panel de roles, la tarjeta del
-discurso de entrada, el marco del video, la sección de Inscripción y el pie
-de página.
+discurso de entrada, la sección de Inscripción y el pie de página.
 
 Esos bloques llevan la clase `.on-dark`, que **sólo redefine los tokens de
 superficie y texto**. Todos los componentes se adaptan solos, sin reglas
@@ -47,10 +46,10 @@ El ritmo de fondos queda así:
 |---|---|
 | Hero | `#FFF` → `#FDFCF7`, con lavados tricolor |
 | Ticker | `#EDEADC` + franjas tricolor |
-| 01 · 03 · 07 | `#FBFAF4` |
+| 01 · 03 | `#FBFAF4` |
 | 02 · 04 · 06 | `#F4F2E8` |
 | 05 Documentos | `#FFFFFF` puro |
-| 08 · pie | Oscuro |
+| 07 · pie | Oscuro |
 
 ### Ojo con el amarillo
 
@@ -89,7 +88,7 @@ inscripción van alternando verde, amarillo y rojo.
 
 **Dónde aparecen los tres juntos:** barra de progreso del scroll, preloader,
 bordes del ticker, marco de la sección de Documentos, escudo del documento,
-pie de la sección de video, borde del menú móvil, franja superior de
+tarjeta del formulario, borde del menú móvil, franja superior de
 Inscripción y franja del pie de página.
 
 ### El logo
@@ -120,8 +119,9 @@ normun/
 ├─ server.js             Servidor local para verla en el navegador
 ├─ assets/
 │  ├─ css/styles.css     Diseño completo
-│  ├─ js/main.js         Animaciones, globo terráqueo, pestañas, roles
-│  └─ img/               Aquí van las fotos (ver assets/img/LEEME.txt)
+│  ├─ js/main.js         Animaciones, globo, pestañas, roles, formulario
+│  └─ img/               Logo y otras imágenes (ver assets/img/LEEME.txt)
+├─ INSCRIPCIONES.md     Cómo conectar el formulario a Google Sheets
 └─ README.md
 ```
 
@@ -221,34 +221,15 @@ Lo único que queda por decidir o validar:
 
 ---
 
-## Cuando se abran las inscripciones
+## Inscripciones en línea
 
-La sección 07 muestra hoy un aviso de «Inscripciones próximamente» y un único
-botón que lleva a las comisiones. Para activarla:
+El formulario de la sección 07 guarda cada inscripción en una hoja de cálculo
+de Google, en tiempo real. Está construido pero **falta conectarlo**: son unos
+diez minutos de configuración, explicados paso a paso en
+[INSCRIPCIONES.md](INSCRIPCIONES.md).
 
-1. En `index.html`, dentro de `<section id="inscripcion">`, borrar la línea
-   del aviso:
-
-   ```html
-   <p class="cta__status"><i aria-hidden="true"></i>Inscripciones próximamente</p>
-   ```
-
-2. Reemplazar el bloque `.cta__actions` por los botones reales:
-
-   ```html
-   <div class="cta__actions">
-     <a href="ENLACE-DEL-FORMULARIO" class="btn btn--red btn--lg">
-       Formulario de inscripción
-     </a>
-     <a href="mailto:CORREO" class="btn btn--ghost btn--lg">Escríbenos</a>
-   </div>
-   ```
-
-3. Ajustar el texto de `.cta__lead`, que hoy dice que las inscripciones aún no
-   están abiertas.
-
-4. En el menú y en el pie, el enlace «Inscripción» puede volver a decir
-   «Inscríbete».
+Para abrir o cerrar las inscripciones se cambia una sola palabra en
+`index.html`: la clase `is-open` de `<section id="inscripcion">`.
 
 ### Secciones retiradas
 

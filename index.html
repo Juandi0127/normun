@@ -805,24 +805,14 @@
      Cuando se abran las inscripciones, reemplazar el aviso
      .cta__status por los botones reales. En el README está
      explicado paso a paso. -->
-<section class="section section--cta on-dark" id="inscripcion">
+<section class="section section--cta on-dark is-open" id="inscripcion">
   <div class="cta-bg" aria-hidden="true"></div>
   <div class="wrap">
     <div class="cta reveal">
       <span class="sec-num">07</span>
-
-      <p class="cta__status"><i aria-hidden="true"></i>Inscripciones próximamente</p>
-
       <h2 class="cta__title">Tu delegación<br>te está esperando</h2>
-      <p class="cta__lead">Cuando se abran las inscripciones, este será el lugar. Mientras tanto,
-      ve conociendo las comisiones y elige dónde quieres que se escuche tu voz.</p>
-
-      <div class="cta__actions">
-        <a href="#comisiones" class="btn btn--red btn--lg">
-          Conoce las comisiones
-          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h12M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-      </div>
+      <p class="cta__lead">Llena el formulario, recibe tu país y empieza a investigar. El resto
+      —los nervios, la placa levantada, el primer aplauso— viene solo.</p>
 
       <ul class="cta__steps">
         <li><b>01</b><span>Elige tu comisión</span></li>
@@ -830,6 +820,182 @@
         <li><b>03</b><span>Prepara tu discurso</span></li>
         <li><b>04</b><span>Debate</span></li>
       </ul>
+    </div>
+
+    <!-- AVISO mientras las inscripciones están cerradas.
+         Se muestra cuando la sección #inscripcion NO tiene la clase "is-open". -->
+    <div class="cta__closed reveal">
+      <p class="cta__status"><i aria-hidden="true"></i>Inscripciones próximamente</p>
+      <p class="cta__closed-txt">Cuando se abran, el formulario aparecerá aquí mismo. Mientras
+      tanto, ve conociendo las comisiones y elige dónde quieres que se escuche tu voz.</p>
+      <a href="#comisiones" class="btn btn--red btn--lg">
+        Conoce las comisiones
+        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h12M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+
+    <!-- FORMULARIO DE INSCRIPCIÓN -->
+    <div class="form-card reveal" id="formCard">
+      <form id="inscripcionForm" novalidate autocomplete="on">
+        <p class="form-card__kicker">Formulario de inscripción</p>
+        <h3 class="form-card__title">Registra tu delegación</h3>
+
+        <fieldset class="form-group">
+          <legend>Tus datos</legend>
+          <div class="form-grid">
+            <div class="field field--wide">
+              <label for="f-nombre">Nombre completo <span class="req" aria-hidden="true">*</span></label>
+              <input type="text" id="f-nombre" name="nombre" required autocomplete="name"
+                     maxlength="80" placeholder="Como aparece en tu documento">
+              <span class="field__err"></span>
+            </div>
+
+            <div class="field">
+              <label for="f-documento">Documento de identidad <span class="req" aria-hidden="true">*</span></label>
+              <input type="text" id="f-documento" name="documento" required
+                     inputmode="numeric" maxlength="20" placeholder="T.I. o C.C.">
+              <span class="field__err"></span>
+            </div>
+
+            <div class="field">
+              <label for="f-nacimiento">Fecha de nacimiento <span class="req" aria-hidden="true">*</span></label>
+              <input type="date" id="f-nacimiento" name="nacimiento" required>
+              <span class="field__err"></span>
+            </div>
+
+            <div class="field">
+              <label for="f-correo">Correo electrónico <span class="req" aria-hidden="true">*</span></label>
+              <input type="email" id="f-correo" name="correo" required autocomplete="email"
+                     maxlength="120" placeholder="tucorreo@ejemplo.com">
+              <span class="field__err"></span>
+            </div>
+
+            <div class="field">
+              <label for="f-telefono">Teléfono / WhatsApp <span class="req" aria-hidden="true">*</span></label>
+              <input type="tel" id="f-telefono" name="telefono" required autocomplete="tel"
+                     maxlength="20" placeholder="300 000 0000">
+              <span class="field__err"></span>
+            </div>
+
+            <div class="field">
+              <label for="f-institucion">Institución educativa <span class="req" aria-hidden="true">*</span></label>
+              <input type="text" id="f-institucion" name="institucion" required
+                     maxlength="90" placeholder="Nombre del colegio">
+              <span class="field__err"></span>
+            </div>
+
+            <div class="field">
+              <label for="f-grado">Grado o curso <span class="req" aria-hidden="true">*</span></label>
+              <input type="text" id="f-grado" name="grado" required maxlength="30"
+                     placeholder="Ej. 10-B">
+              <span class="field__err"></span>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="form-group">
+          <legend>Tu delegación</legend>
+          <div class="form-grid">
+            <div class="field">
+              <label for="f-comision1">Comisión · primera opción <span class="req" aria-hidden="true">*</span></label>
+              <select id="f-comision1" name="comision1" required>
+                <option value="">Elige una comisión</option>
+                <option>Desarme y Seguridad Internacional</option>
+                <option>Alto Comisionado de la ONU para los Refugiados</option>
+                <option>ONU Mujeres</option>
+                <option>UNESCO</option>
+                <option>Consejo de Seguridad</option>
+                <option>Comisión Colombia</option>
+              </select>
+              <span class="field__err"></span>
+            </div>
+
+            <div class="field">
+              <label for="f-comision2">Comisión · segunda opción <span class="req" aria-hidden="true">*</span></label>
+              <select id="f-comision2" name="comision2" required>
+                <option value="">Elige una comisión</option>
+                <option>Desarme y Seguridad Internacional</option>
+                <option>Alto Comisionado de la ONU para los Refugiados</option>
+                <option>ONU Mujeres</option>
+                <option>UNESCO</option>
+                <option>Consejo de Seguridad</option>
+                <option>Comisión Colombia</option>
+              </select>
+              <span class="field__err"></span>
+            </div>
+
+            <div class="field">
+              <label for="f-experiencia">¿Has participado antes en un MUN? <span class="req" aria-hidden="true">*</span></label>
+              <select id="f-experiencia" name="experiencia" required>
+                <option value="">Selecciona</option>
+                <option>No, es mi primera vez</option>
+                <option>Sí, una vez</option>
+                <option>Sí, dos o más veces</option>
+              </select>
+              <span class="field__err"></span>
+            </div>
+
+            <div class="field">
+              <label for="f-idioma">Idioma de preferencia</label>
+              <select id="f-idioma" name="idioma">
+                <option>Español</option>
+                <option>Inglés</option>
+              </select>
+            </div>
+
+            <div class="field field--wide">
+              <label for="f-comentarios">Comentarios <span class="opt">(opcional)</span></label>
+              <textarea id="f-comentarios" name="comentarios" rows="3" maxlength="500"
+                        placeholder="Condiciones médicas, alimentación especial, o cualquier cosa que la organización deba saber."></textarea>
+            </div>
+          </div>
+        </fieldset>
+
+        <div class="field field--check">
+          <label class="check">
+            <input type="checkbox" id="f-autorizacion" name="autorizacion" required>
+            <span class="check__box" aria-hidden="true"></span>
+            <span class="check__txt">Autorizo a NORMUN y a la Escuela Normal Superior del Distrito
+            de Barranquilla a tratar mis datos personales con el único fin de gestionar mi
+            participación en el modelo, conforme a la Ley 1581 de 2012.
+            <span class="req" aria-hidden="true">*</span></span>
+          </label>
+          <span class="field__err"></span>
+        </div>
+
+        <p class="form-card__minor">Si eres menor de edad, esta inscripción debe contar con el
+        aval de tu acudiente. La organización lo confirmará antes de asignar delegación.</p>
+
+        <div class="hp" aria-hidden="true">
+          <label for="f-web">No llenar este campo</label>
+          <input type="text" id="f-web" name="website" tabindex="-1" autocomplete="off">
+        </div>
+
+        <button type="submit" class="btn btn--red btn--lg form-card__submit" id="formSubmit">
+          <span class="form-card__submit-txt">Enviar inscripción</span>
+          <svg class="form-card__spin" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-dasharray="42 14"/>
+          </svg>
+        </button>
+
+        <p class="form-card__err" id="formError" role="alert"></p>
+      </form>
+
+      <div class="form-done" id="formDone" hidden>
+        <div class="form-done__mark" aria-hidden="true">
+          <svg viewBox="0 0 48 48" fill="none">
+            <circle cx="24" cy="24" r="21" stroke="currentColor" stroke-width="2"/>
+            <path d="M15 24.5l6.5 6.5L34 18" stroke="currentColor" stroke-width="2.6"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3>Inscripción recibida</h3>
+        <p>Gracias, <b id="doneName">delegado</b>. Tu registro quedó guardado.</p>
+        <p class="form-done__next">La organización revisará tu solicitud y te escribirá al correo
+        que registraste con la delegación asignada y las próximas fechas.</p>
+        <button type="button" class="btn btn--ghost" id="formAgain">Inscribir a otra persona</button>
+      </div>
     </div>
   </div>
 </section>

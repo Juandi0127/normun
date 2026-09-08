@@ -321,7 +321,177 @@
   if (yr) yr.textContent = new Date().getFullYear();
 
   /* =========================================================
-     9. GLOBO TERRÁQUEO ANIMADO (canvas)
+     9. FORMULARIO DE INSCRIPCIÓN
+
+     Manda los datos a una hoja de cálculo de Google mediante un
+     Apps Script. Todo el detalle de cómo montarlo está en
+     INSCRIPCIONES.md, en la raíz del proyecto.
+
+     Para conectarlo: pegar abajo la URL que da Apps Script al
+     publicar el script como aplicación web.
+     ========================================================= */
+  var ENDPOINT = '';   // <-- pegar aquí la URL de Apps Script
+
+  (function inscripcion() {
+    var form = $('#inscripcionForm');
+    if (!form) return;
+
+    var card    = $('#formCard');
+    var done    = $('#formDone');
+    var boton   = $('#formSubmit');
+    var errCaja = $('#formError');
+
+    /* mensajes de error, por campo */
+    var MENSAJES = {
+      nombre:       'Escribe tu nombre completo.',
+      documento:    'Escribe tu número de documento.',
+      nacimiento:   'Indica tu fecha de nacimiento.',
+      correo:       'Escribe un correo válido, por ejemplo nombre@correo.com',
+      telefono:     'Escribe un número de contacto de al menos 7 dígitos.',
+      institucion:  'Escribe el nombre de tu institución educativa.',
+      grado:        'Indica tu grado o curso.',
+      comision1:    'Elige tu primera opción de comisión.',
+      comision2:    'Elige tu segunda opción de comisión.',
+      experiencia:  'Cuéntanos si ya has participado en un MUN.',
+      autorizacion: 'Necesitamos tu autorización para procesar la inscripción.'
+    };
+
+    function campoDe(el) { return el.closest('.field'); }
+
+    function marcarError(el, texto) {
+      var f = campoDe(el);
+      if (!f) return;
+      f.classList.add('has-error');
+      var span = f.querySelector('.field__err');
+      if (span) span.textContent = texto;
+    }
+
+    function limpiarError(el) {
+      var f = campoDe(el);
+      if (f) f.classList.remove('has-error');
+    }
+
+    /* Valida un campo. Devuelve true si está bien. */
+    function validar(el) {
+      var v = (el.value || '').trim();
+      var n = el.name;
+
+      if (el.type === 'checkbox') {
+        if (!el.checked) { marcarError(el, MENSAJES[n]); return false; }
+        limpiarError(el); return true;
+      }
+
+      if (el.required && !v) { marcarError(el, MENSAJES[n] || 'Este campo es obligatorio.'); return false; }
+
+      if (n === 'correo' && v && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)) {
+        marcarError(el, MENSAJES.correo); return false;
+      }
+      if (n === 'telefono' && v && (v.replace(/\D/g, '').length < 7)) {
+        marcarError(el, MENSAJES.telefono); return false;
+      }
+      if (n === 'nacimiento' && v) {
+        var f = new Date(v);
+        var hoy = new Date();
+        if (isNaN(f) || f > hoy) { marcarError(el, 'Revisa la fecha de nacimiento.'); return false; }
+        if (hoy.getFullYear() - f.getFullYear() > 100) {
+          marcarError(el, 'Revisa la fecha de nacimiento.'); return false;
+        }
+      }
+      limpiarError(el); return true;
+    }
+
+    var campos = $$('input, select, textarea', form).filter(function (el) {
+      return el.name && el.name !== 'website';
+    });
+
+    /* el error desaparece en cuanto la persona corrige */
+    campos.forEach(function (el) {
+      var evento = (el.tagName === 'SELECT' || el.type === 'checkbox' || el.type === 'date')
+        ? 'change' : 'input';
+      el.addEventListener(evento, function () {
+        if (campoDe(el) && campoDe(el).classList.contains('has-error')) validar(el);
+      });
+      el.addEventListener('blur', function () { if (el.value.trim()) validar(el); });
+    });
+
+    function mostrarErrorGeneral(texto) {
+      card.classList.add('has-error');
+      errCaja.textContent = texto;
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      card.classList.remove('has-error');
+
+      /* trampa anti-spam: si viene llena, es un robot. Fingimos éxito. */
+      if (form.website && form.website.value) { form.reset(); return; }
+
+      var primerFallo = null;
+      campos.forEach(function (el) {
+        if (!validar(el) && !primerFallo) primerFallo = el;
+      });
+
+      if (primerFallo) {
+        mostrarErrorGeneral('Revisa los campos marcados en rojo y vuelve a intentarlo.');
+        primerFallo.focus();
+        primerFallo.scrollIntoView({ block: 'center', behavior: reduce ? 'auto' : 'smooth' });
+        return;
+      }
+
+      if (!ENDPOINT) {
+        mostrarErrorGeneral('El formulario todavía no está conectado. Falta pegar la URL de ' +
+                            'Apps Script en assets/js/main.js (constante ENDPOINT). ' +
+                            'Las instrucciones están en INSCRIPCIONES.md.');
+        return;
+      }
+
+      var datos = new FormData(form);
+      datos.append('enviadoEl', new Date().toISOString());
+      datos.append('origen', location.href);
+
+      card.classList.add('is-sending');
+      boton.disabled = true;
+      $('.form-card__submit-txt', boton).textContent = 'Enviando…';
+
+      /* Apps Script no devuelve cabeceras CORS, así que se envía como
+         formulario simple: la petición sale, la respuesta no se lee.
+         Es el modo estándar de usar Apps Script desde un sitio estático. */
+      fetch(ENDPOINT, { method: 'POST', body: datos, mode: 'no-cors' })
+        .then(function () {
+          var nombre = (form.nombre.value || '').trim().split(' ')[0] || 'delegado';
+          var destinoNombre = $('#doneName');
+          if (destinoNombre) destinoNombre.textContent = nombre;
+          form.hidden = true;
+          done.hidden = false;
+          card.scrollIntoView({ block: 'center', behavior: reduce ? 'auto' : 'smooth' });
+        })
+        .catch(function () {
+          mostrarErrorGeneral('No pudimos enviar la inscripción. Revisa tu conexión e ' +
+                              'inténtalo de nuevo en un momento.');
+        })
+        .finally(function () {
+          card.classList.remove('is-sending');
+          boton.disabled = false;
+          $('.form-card__submit-txt', boton).textContent = 'Enviar inscripción';
+        });
+    });
+
+    /* "Inscribir a otra persona" */
+    var otra = $('#formAgain');
+    if (otra) {
+      otra.addEventListener('click', function () {
+        form.reset();
+        $$('.field', form).forEach(function (f) { f.classList.remove('has-error'); });
+        card.classList.remove('has-error');
+        done.hidden = true;
+        form.hidden = false;
+        form.nombre.focus();
+      });
+    }
+  })();
+
+  /* =========================================================
+     10. GLOBO TERRÁQUEO ANIMADO (canvas)
      ========================================================= */
   var canvas = $('#globeCanvas');
   if (!canvas || !canvas.getContext) return;
