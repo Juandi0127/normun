@@ -34,6 +34,16 @@ Toma unos diez minutos y se hace una sola vez.
    (mejor una cuenta de la institución que una personal).
 2. Ponerle nombre: **NORMUN — Inscripciones**.
 
+> **Esto es lo más importante de toda la guía.** Usar una cuenta de Google que
+> sea de la institución, no la personal de quien monta la página. La hoja, el
+> script y los datos quedan colgando de esa cuenta: si es la personal de
+> alguien que después se va, el formulario deja de funcionar y las
+> inscripciones se quedan encerradas en un Drive ajeno.
+>
+> Si ya se creó con una cuenta personal, se puede transferir: *Compartir →
+> agregar la cuenta institucional como editora → los tres puntos junto a su
+> nombre → Transferir propiedad*.
+
 ### 2 · Abrir el editor de scripts
 
 En el menú de la hoja: **Extensiones → Apps Script**.
@@ -189,25 +199,6 @@ Guardar, subir los cambios, y listo.
 
 Llenar el formulario con datos falsos y confirmar que aparece la fila en la
 hoja. **Siempre hacer esta prueba antes de anunciar las inscripciones.**
-
----
-
-## Abrir y cerrar las inscripciones
-
-En `index.html`, en la etiqueta de la sección:
-
-```html
-<!-- ABIERTAS: se ve el formulario -->
-<section class="section section--cta on-dark is-open" id="inscripcion">
-
-<!-- CERRADAS: se ve el aviso de "próximamente" -->
-<section class="section section--cta on-dark" id="inscripcion">
-```
-
-Es la única palabra que hay que cambiar: `is-open`.
-
-**Ahora mismo están abiertas**, para que se pueda ver y probar el formulario.
-Si todavía no es momento, quitar `is-open` antes de publicar.
 
 ---
 

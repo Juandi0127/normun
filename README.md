@@ -175,6 +175,23 @@ vista previa se vea bien al compartir por WhatsApp o Instagram:
 <meta property="og:image" content="https://TU-SITIO.netlify.app/assets/img/logo-normun.png">
 ```
 
+## Traspaso: cuentas que deben ser de la institución
+
+El sitio no depende de ningún servidor propio, pero sí de tres cuentas. Si se
+crean con la cuenta personal de quien desarrolla, el día que esa persona ya no
+esté la institución pierde el control. Conviene que las tres sean
+institucionales desde el principio:
+
+| Cuenta | Para qué | Si se pierde |
+|---|---|---|
+| **Google** | Hoja de inscripciones y su script | El formulario deja de recibir y los datos quedan en un Drive ajeno |
+| **Netlify** | Publicación del sitio | No se puede actualizar ni cambiar el dominio |
+| **GitHub** | Código fuente | Se pierde el historial (aunque quede copia local) |
+
+Todas se pueden transferir después, pero es más fácil hacerlo bien de entrada.
+
+---
+
 ## Otras opciones de hosting
 
 - **Vercel** — mismo procedimiento que Netlify.
@@ -228,8 +245,8 @@ de Google, en tiempo real. Está construido pero **falta conectarlo**: son unos
 diez minutos de configuración, explicados paso a paso en
 [INSCRIPCIONES.md](INSCRIPCIONES.md).
 
-Para abrir o cerrar las inscripciones se cambia una sola palabra en
-`index.html`: la clase `is-open` de `<section id="inscripcion">`.
+El formulario está **siempre visible**: no hay ningún interruptor que alguien
+tenga que acordarse de activar más adelante.
 
 ### Secciones retiradas
 
