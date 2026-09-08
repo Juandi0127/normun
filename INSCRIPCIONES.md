@@ -102,6 +102,14 @@ function doPost(e) {
       d.autorizacion ? 'Sí' : 'No'
     ]);
 
+    // Google copia el formato de la fila de arriba a la fila nueva. Sin esto,
+    // la primera fila hereda el texto BLANCO de la cabecera y queda invisible,
+    // y todas las siguientes lo heredan de ella.
+    hoja.getRange(hoja.getLastRow(), 1, 1, ENCABEZADOS.length)
+        .setFontColor('#12251A')
+        .setFontWeight('normal')
+        .setBackground(null);
+
     if (AVISAR_A) avisar(d);
     return respuesta('ok');
 
@@ -273,6 +281,7 @@ function darFormato() {
 
   const VERDE  = '#2E9E42';
   const ROJO   = '#C1272D';
+  const TINTA  = '#12251A';   // color del texto del cuerpo
   const COLS   = 14;                     // de la A a la N
   const filas  = hoja.getLastRow();
   const ultima = Math.max(filas, 2);
@@ -295,7 +304,10 @@ function darFormato() {
   // --- Cuerpo ---------------------------------------------------------
   if (filas > 1) {
     const cuerpo = hoja.getRange(2, 1, filas - 1, COLS);
-    cuerpo.setFontSize(10)
+    cuerpo.setFontColor(TINTA)        // <- esto rescata el texto invisible
+          .setFontWeight('normal')
+          .setBackground(null)        // se quita el fondo heredado
+          .setFontSize(10)
           .setVerticalAlignment('top')
           .setWrap(false);
 
@@ -309,8 +321,12 @@ function darFormato() {
 
   // --- Filas alternadas (se quita la anterior para no apilar) ----------
   hoja.getBandings().forEach(function (b) { b.remove(); });
-  hoja.getRange(1, 1, ultima, COLS)
-      .applyRowBanding(SpreadsheetApp.BandingTheme.LIGHT_GREY, true, false);
+  if (filas > 1) {
+    // solo sobre los datos: si se incluye la fila 1, el tema del rayado
+    // pisa la cabecera verde y la deja gris
+    hoja.getRange(2, 1, filas - 1, COLS)
+        .applyRowBanding(SpreadsheetApp.BandingTheme.LIGHT_GREY, false, false);
+  }
 
   // --- Bordes y líneas -------------------------------------------------
   hoja.getRange(1, 1, ultima, COLS)
@@ -458,13 +474,36 @@ datos y a quién se le da acceso a la hoja.
 
 ---
 
+> ### El texto se ve en blanco (o no se ve)
+>
+> Si al abrir la hoja las filas parecen vacías pero al pararse en una casilla la
+> barra de fórmulas **sí muestra el dato**, el texto está en blanco sobre fondo
+> blanco.
+>
+> Pasa porque Google copia el formato de la fila de arriba a cada fila nueva: la
+> primera fila de datos heredó el texto blanco de la cabecera, y de ahí en
+> adelante cada una lo heredó de la anterior.
+>
+> Ya está resuelto en el código de esta guía —`doPost` fija el color de cada
+> fila que escribe, y `darFormato` lo corrige en las que ya estaban—. Si tu
+> script es de una versión anterior, hay que actualizarlo:
+>
+> 1. Reemplazar las funciones `doPost` y `darFormato` por las de esta guía.
+> 2. Correr **`darFormato`** una vez, para rescatar las filas existentes.
+> 3. **Implementar → Gestionar implementaciones → editar → Nueva versión**, para
+>    que el cambio de `doPost` entre en vigor.
+>
+> El paso 3 es el que se olvida: sin publicar versión nueva, el formulario sigue
+> corriendo el código viejo y las filas nuevas vuelven a salir invisibles.
+
 ## Si algo falla
 
 | Síntoma | Causa probable |
 |---|---|
 | Sale «el formulario todavía no está conectado» | Falta pegar la URL en `ENDPOINT` |
 | Se envía pero no aparece la fila | **Lo más probable: la implementación quedó restringida al dominio del colegio en vez de «Cualquier persona».** Comprobar abriendo la URL en incógnito. También puede ser que se editó el script sin publicar versión nueva |
-| Llegan filas vacías | Puede ser un robot: revisar que el campo trampa `website` siga en el HTML |
+| Las filas se ven vacías pero la barra de fórmulas muestra el dato | Texto blanco heredado de la cabecera. Ver el recuadro de arriba |
+| Llegan filas realmente vacías | Puede ser un robot: revisar que el campo trampa `website` siga en el HTML |
 | Llegan duplicados | El bloqueo cubre dos minutos; más allá de eso son envíos reales |
 
 ---
