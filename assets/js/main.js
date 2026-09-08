@@ -330,7 +330,7 @@
      Para conectarlo: pegar abajo la URL que da Apps Script al
      publicar el script como aplicación web.
      ========================================================= */
-  var ENDPOINT = '';   // <-- pegar aquí la URL de Apps Script
+  var ENDPOINT = 'https://script.google.com/a/macros/ensdbexcelencia.edu.co/s/AKfycby1fq_yr7P9TS0MWlnmvhJrTKLAp13GSu4Wxpmkw0Te29_x4PAtMXX7H-bqcDyE2gDK/exec';   // <-- pegar aquí la URL de Apps Script
 
   (function inscripcion() {
     var form = $('#inscripcionForm');

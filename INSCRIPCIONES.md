@@ -184,6 +184,30 @@ function respuesta(estado) {
 > «Cualquier persona» significa que cualquiera puede *enviar* datos, no
 > leerlos. La hoja sigue siendo privada.
 
+> ### ⚠️ El error más común
+>
+> Si el proyecto vive en una cuenta de Google Workspace (como
+> `@ensdbexcelencia.edu.co`), Google propone por defecto **«Cualquier persona
+> de ensdbexcelencia.edu.co»**. Con esa opción el formulario **solo funciona
+> para quien tenga cuenta del colegio y esté con la sesión abierta**: a
+> cualquier otra persona, Google le devuelve una pantalla de inicio de sesión
+> y la inscripción se pierde.
+>
+> Y se pierde **en silencio**: la página muestra «Inscripción recibida» igual,
+> porque el navegador no puede leer lo que respondió Google.
+>
+> Tiene que quedar en **«Cualquier persona»**, a secas.
+>
+> **Cómo comprobarlo sin instalar nada:** abrir la URL que termina en `/exec` en una
+> ventana de incógnito. Si pide iniciar sesión, está mal. Si muestra un error
+> de Apps Script diciendo que no encuentra `doGet`, está bien: significa que
+> llegó al script sin pedir permiso.
+>
+> Si el administrador del Workspace del colegio no permite la opción
+> «Cualquier persona», hay dos salidas: pedirle que la habilite, o crear una
+> cuenta de Gmail propia de NORMUN (por ejemplo `normun.ensdb@gmail.com`) que
+> quede en manos de la coordinación, no de una persona.
+
 ### 5 · Conectarlo a la página
 
 Abrir `assets/js/main.js`, buscar la línea que dice `var ENDPOINT` (está al
@@ -241,7 +265,7 @@ datos y a quién se le da acceso a la hoja.
 | Síntoma | Causa probable |
 |---|---|
 | Sale «el formulario todavía no está conectado» | Falta pegar la URL en `ENDPOINT` |
-| Se envía pero no aparece la fila | La implementación no está como «Cualquier persona», o se editó el script sin publicar versión nueva |
+| Se envía pero no aparece la fila | **Lo más probable: la implementación quedó restringida al dominio del colegio en vez de «Cualquier persona».** Comprobar abriendo la URL en incógnito. También puede ser que se editó el script sin publicar versión nueva |
 | Llegan filas vacías | Puede ser un robot: revisar que el campo trampa `website` siga en el HTML |
 | Llegan duplicados | El bloqueo cubre dos minutos; más allá de eso son envíos reales |
 
