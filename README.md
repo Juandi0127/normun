@@ -116,6 +116,7 @@ azimutal, rama izquierda roja, rama derecha verde).
 ```
 normun/
 ├─ index.html            Toda la página (una sola vista, navegación por anclas)
+├─ pfc/index.html        Formulario suelto para el PFC, solo por enlace directo
 ├─ server.js             Servidor local para verla en el navegador
 ├─ assets/
 │  ├─ css/styles.css     Diseño completo
@@ -189,6 +190,47 @@ institucionales desde el principio:
 | **GitHub** | Código fuente | Se pierde el historial (aunque quede copia local) |
 
 Todas se pueden transferir después, pero es más fácil hacerlo bien de entrada.
+
+---
+
+## La página /pfc
+
+Además del formulario de la sección 07, hay una página suelta en **`/pfc`** con
+ese **mismo formulario**, pensada para repartir por enlace directo al Programa
+de Formación Complementaria.
+
+- **No se enlaza desde ningún lado del sitio.** No aparece en el menú, ni en el
+  pie, ni en ninguna sección. Solo llega quien reciba el enlace.
+- Lleva `noindex, nofollow`, así que tampoco sale en buscadores.
+- **Escribe en la misma hoja de cálculo**, en las mismas columnas. No hay nada
+  que configurar aparte: usa el mismo `main.js` y el mismo `ENDPOINT`.
+
+### Si se cambia el formulario, hay que cambiarlo dos veces
+
+El marcado del formulario está **duplicado** en `index.html` y en
+`pfc/index.html`. Los dos archivos tienen un comentario avisándolo.
+
+Se duplicó a propósito: el sitio no tiene proceso de compilación, y meter
+maquinaria para compartir un fragmento de HTML habría complicado el
+mantenimiento de alguien que llegue después. Pero si se agrega o se quita un
+campo, **tiene que hacerse en los dos**, o las inscripciones llegarán a la hoja
+con columnas distintas según por dónde entraron.
+
+### Para hacer otra página así
+
+Copiar la carpeta `pfc/` con otro nombre (por ejemplo `docentes/`) y cambiarle
+el título y el texto de arriba. Queda publicada en `/docentes` sin tocar nada
+más.
+
+### Saber de dónde vino cada inscripción
+
+Hoy la hoja no distingue si alguien se inscribió desde el sitio o desde `/pfc`:
+son las mismas columnas. Pero **la página ya envía esa información** en un campo
+llamado `origen`; el script simplemente no la escribe.
+
+Para empezar a registrarla, en el Apps Script: agregar `'Origen'` al final de
+`ENCABEZADOS` y `d.origen || ''` al final del `appendRow`, y publicar una
+versión nueva. Quedaría como columna O, sin tocar las anteriores.
 
 ---
 

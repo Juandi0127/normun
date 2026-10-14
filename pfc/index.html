@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0A0F0C">
+<title>Inscripción PFC · NORMUN</title>
+<meta name="description" content="Formulario de inscripción al Modelo de Naciones Unidas de la Escuela Normal Superior del Distrito de Barranquilla, para el Programa de Formación Complementaria.">
+
+<!-- Esta página NO se enlaza desde el sitio y NO se indexa en buscadores:
+     se reparte únicamente por enlace directo. -->
+<meta name="robots" content="noindex, nofollow">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230A0F0C'/%3E%3Cg fill='none' stroke-width='2'%3E%3Ccircle cx='32' cy='32' r='18' stroke='%232E9E42'/%3E%3Ccircle cx='32' cy='32' r='12' stroke='%23F0C33C'/%3E%3Ccircle cx='32' cy='32' r='6' stroke='%23F0C33C'/%3E%3Cpath d='M32 14v36M14 32h36M19.3 19.3 44.7 44.7M44.7 19.3 19.3 44.7' stroke='%23C1272D' stroke-width='1.6'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="../assets/img/logo-normun.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+
+<div class="grain" aria-hidden="true"></div>
+
+<!-- La cabecera va sin id="nav" a propósito: así main.js no le aplica el
+     comportamiento de ocultarse al bajar, y la clase is-stuck fija deja el
+     fondo claro y el texto oscuro desde el primer momento. -->
+<header class="nav is-stuck">
+  <div class="nav__wrap">
+    <a href="../" class="brand" aria-label="NORMUN — ir al sitio">
+      <span class="brand__logo">
+        <img src="../assets/img/logo-normun.png" alt="" loading="eager"
+             onerror="this.closest('.brand__logo').classList.add('is-missing')">
+        <svg class="brand__mark" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+          <circle class="bm-globe" cx="24" cy="24" r="15" stroke-width="1.7"/>
+          <circle class="bm-lat" cx="24" cy="24" r="10" stroke-width="1.1"/>
+          <circle class="bm-lat" cx="24" cy="24" r="5" stroke-width="1.1"/>
+          <path class="bm-mer" d="M24 9v30M9 24h30M13.4 13.4 34.6 34.6M34.6 13.4 13.4 34.6" stroke-width="1.1"/>
+        </svg>
+      </span>
+      <span class="brand__text">
+        <b>NORMUN</b>
+        <em>Escuela Normal Superior &middot; Barranquilla</em>
+      </span>
+    </a>
+  </div>
+</header>
+
+<main>
+<section class="section section--cta on-dark pfc-top" id="inscripcion">
+  <div class="cta-bg" aria-hidden="true"></div>
+  <div class="wrap">
+
+    <div class="cta reveal">
+      <span class="sec-num">Programa de Formación Complementaria</span>
+      <h2 class="cta__title">Tu delegación<br>te está esperando</h2>
+      <p class="cta__lead">Llena el formulario, recibe tu país y empieza a investigar. El resto
+      —los nervios, la placa levantada, el primer aplauso— viene solo.</p>
+
+      <ul class="cta__steps">
+        <li><b>01</b><span>Elige tu comisión</span></li>
+        <li><b>02</b><span>Recibe tu delegación</span></li>
+        <li><b>03</b><span>Prepara tu discurso</span></li>
+        <li><b>04</b><span>Debate</span></li>
+      </ul>
+    </div>
+
+    <!-- ⚠️ FORMULARIO DUPLICADO A PROPÓSITO
+         Este bloque es una copia exacta del que está en index.html.
+         Si se cambia uno, HAY QUE CAMBIAR EL OTRO: comparten el mismo
+         main.js y la misma hoja de cálculo, así que los campos deben
+         coincidir. -->
+    <div class="form-card reveal" id="formCard">
+      <form id="inscripcionForm" novalidate autocomplete="on">
+        <p class="form-card__kicker">Formulario de inscripción</p>
+        <h3 class="form-card__title">Registra tu delegación</h3>
+
+        <fieldset class="form-group">
+          <legend>Tus datos</legend>
+          <div class="form-grid">
+            <div class="field field--wide">
+              <label for="f-nombre">Nombre completo <span class="req" aria-hidden="true">*</span></label>
+              <input type="text" id="f-nombre" name="nombre" required autocomplete="name"
+                     maxlength="80" placeholder="Como aparece en tu documento">
+              <span class="field__err"></span>
+            </div>
+
+            <div class="field">
+              <label for="f-documento">Documento de identidad <span class="req" aria-hidden="true">*</span></label>
+              <input type="text" id="f-documento" name="documento" required
+                     inputmode="numeric" maxlength="20" placeholder="T.I. o C.C.">
+              <span class="field__err"></span>
+            </div>
+
+            <div class="field">
+              <label for="f-nacimiento">Fecha de nacimiento <span class="req" aria-hidden="true">*</span></label>
+              <input type="date" id="f-nacimiento" name="nacimiento" required>
+              <span class="field__err"></span>
+            </div>
+
+            <div class="field">
+              <label for="f-correo">Correo electrónico <span class="req" aria-hidden="true">*</span></label>
+              <input type="email" id="f-correo" name="correo" required autocomplete="email"
+                     maxlength="120" placeholder="tucorreo@ejemplo.com">
+              <span class="field__err"></span>
+            </div>
+
+            <div class="field">
+              <label for="f-telefono">Teléfono / WhatsApp <span class="req" aria-hidden="true">*</span></label>
+              <input type="tel" id="f-telefono" name="telefono" required autocomplete="tel"
+                     maxlength="20" placeholder="300 000 0000">
+              <span class="field__err"></span>
+            </div>
+
+            <div class="field">
+              <label for="f-institucion">Institución educativa <span class="req" aria-hidden="true">*</span></label>
+              <input type="text" id="f-institucion" name="institucion" required
+                     maxlength="90" placeholder="Nombre del colegio">
+              <span class="field__err"></span>
+            </div>
+
+            <div class="field">
+              <label for="f-grado">Grado o curso <span class="req" aria-hidden="true">*</span></label>
+              <input type="text" id="f-grado" name="grado" required maxlength="30"
+                     placeholder="Ej. 10-B">
+              <span class="field__err"></span>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="form-group">
+          <legend>Tu delegación</legend>
+          <div class="form-grid">
+            <div class="field">
+              <label for="f-comision1">Comisión · primera opción <span class="req" aria-hidden="true">*</span></label>
+              <select id="f-comision1" name="comision1" required>
+                <option value="">Elige una comisión</option>
+                <option>Desarme y Seguridad Internacional</option>
+                <option>Alto Comisionado de la ONU para los Refugiados</option>
+                <option>ONU Mujeres</option>
+                <option>UNESCO</option>
+                <option>Consejo de Seguridad</option>
+                <option>Comisión Colombia</option>
+              </select>
+              <span class="field__err"></span>
+            </div>
+
+            <div class="field">
+              <label for="f-comision2">Comisión · segunda opción <span class="req" aria-hidden="true">*</span></label>
+              <select id="f-comision2" name="comision2" required>
+                <option value="">Elige una comisión</option>
+                <option>Desarme y Seguridad Internacional</option>
+                <option>Alto Comisionado de la ONU para los Refugiados</option>
+                <option>ONU Mujeres</option>
+                <option>UNESCO</option>
+                <option>Consejo de Seguridad</option>
+                <option>Comisión Colombia</option>
+              </select>
+              <span class="field__err"></span>
+            </div>
+
+            <div class="field">
+              <label for="f-experiencia">¿Has participado antes en un MUN? <span class="req" aria-hidden="true">*</span></label>
+              <select id="f-experiencia" name="experiencia" required>
+                <option value="">Selecciona</option>
+                <option>No, es mi primera vez</option>
+                <option>Sí, una vez</option>
+                <option>Sí, dos o más veces</option>
+              </select>
+              <span class="field__err"></span>
+            </div>
+
+            <div class="field">
+              <label for="f-idioma">Idioma de preferencia</label>
+              <select id="f-idioma" name="idioma">
+                <option>Español</option>
+                <option>Inglés</option>
+              </select>
+            </div>
+
+            <div class="field field--wide">
+              <label for="f-comentarios">Comentarios <span class="opt">(opcional)</span></label>
+              <textarea id="f-comentarios" name="comentarios" rows="3" maxlength="500"
+                        placeholder="Condiciones médicas, alimentación especial, o cualquier cosa que la organización deba saber."></textarea>
+            </div>
+          </div>
+        </fieldset>
+
+        <div class="field field--check">
+          <label class="check">
+            <input type="checkbox" id="f-autorizacion" name="autorizacion" required>
+            <span class="check__box" aria-hidden="true"></span>
+            <span class="check__txt">Autorizo a NORMUN y a la Escuela Normal Superior del Distrito
+            de Barranquilla a tratar mis datos personales con el único fin de gestionar mi
+            participación en el modelo, conforme a la Ley 1581 de 2012.
+            <span class="req" aria-hidden="true">*</span></span>
+          </label>
+          <span class="field__err"></span>
+        </div>
+
+        <p class="form-card__minor">Si eres menor de edad, esta inscripción debe contar con el
+        aval de tu acudiente. La organización lo confirmará antes de asignar delegación.</p>
+
+        <div class="hp" aria-hidden="true">
+          <label for="f-web">No llenar este campo</label>
+          <input type="text" id="f-web" name="website" tabindex="-1" autocomplete="off">
+        </div>
+
+        <button type="submit" class="btn btn--red btn--lg form-card__submit" id="formSubmit">
+          <span class="form-card__submit-txt">Enviar inscripción</span>
+          <svg class="form-card__spin" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-dasharray="42 14"/>
+          </svg>
+        </button>
+
+        <p class="form-card__err" id="formError" role="alert"></p>
+      </form>
+
+      <div class="form-done" id="formDone" hidden>
+        <div class="form-done__mark" aria-hidden="true">
+          <svg viewBox="0 0 48 48" fill="none">
+            <circle cx="24" cy="24" r="21" stroke="currentColor" stroke-width="2"/>
+            <path d="M15 24.5l6.5 6.5L34 18" stroke="currentColor" stroke-width="2.6"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3>Inscripción recibida</h3>
+        <p>Gracias, <b id="doneName">delegado</b>. Tu registro quedó guardado.</p>
+        <p class="form-done__next">La organización revisará tu solicitud y te escribirá al correo
+        que registraste con la delegación asignada y las próximas fechas.</p>
+        <button type="button" class="btn btn--ghost" id="formAgain">Inscribir a otra persona</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+</main>
+
+<footer class="foot on-dark">
+  <div class="wrap">
+    <div class="foot__bottom">
+      <p>© <span id="year">2026</span> NORMUN · Escuela Normal Superior del Distrito de Barranquilla.</p>
+      <p class="foot__mini"><a href="../">Conocer el modelo completo</a></p>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="../assets/js/main.js"></script>
+</body>
+</html>

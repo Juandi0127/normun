@@ -64,7 +64,8 @@
 
     if (nav) {
       nav.classList.toggle('is-stuck', y > 40);
-      var hide = y > lastY && y > 420 && !navLinks.classList.contains('is-open');
+      var abierto = navLinks && navLinks.classList.contains('is-open');
+      var hide = y > lastY && y > 420 && !abierto;
       nav.classList.toggle('is-hidden', hide);
     }
     lastY = y;

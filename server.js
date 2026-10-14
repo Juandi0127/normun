@@ -25,7 +25,11 @@ const TYPES = {
 
 http.createServer((req, res) => {
   let rel = decodeURIComponent(req.url.split('?')[0]);
-  if (rel === '/') rel = '/index.html';
+
+  // Índice de carpeta: '/' y '/pfc' o '/pfc/' sirven su index.html,
+  // igual que hace Netlify en producción.
+  if (rel.endsWith('/')) rel += 'index.html';
+  else if (!path.extname(rel)) rel += '/index.html';
 
   const file = path.join(ROOT, path.normalize(rel).replace(/^([/\\])+/, ''));
   if (!file.startsWith(ROOT)) {
